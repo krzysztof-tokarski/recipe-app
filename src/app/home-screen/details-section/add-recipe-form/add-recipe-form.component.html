@@ -1,0 +1,15 @@
+<form [formGroup]="form">
+  <label for="recipeName"> Jak chcesz nazwać ten przepis?
+    <input id="recipeName" formControlName="recipeName" placeholder="Nazwa przepisu..." />
+  </label>
+  <ng-container formArrayName="description">
+    <label> Przygotowanie krok po kroku...
+    <ng-container *ngFor="let step of descriptionStepsControls; let index =index">
+        <input formControlName="description" placeholder="Następny krok...">
+    </ng-container>
+    </label>
+  </ng-container>
+  <button type="button" (click)="addRecipeStep()">
+    Dodaj następny krok!
+  </button>
+</form>

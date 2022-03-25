@@ -1,0 +1,16 @@
+div {
+  height: 12vh;
+  display: flex;
+}
+
+h1 {
+  flex: 1;
+  border-bottom: 1px solid black;
+  background-color: whitesmoke;
+  letter-spacing: 2px;
+  font-size: 4em;
+  text-align: center;
+  color: rgba(29, 31, 30, 0.876);
+  height: 100%;
+  padding-top: 10px;
+}

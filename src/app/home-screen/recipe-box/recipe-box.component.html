@@ -1,0 +1,10 @@
+<div class="inputs-container">
+  <app-search-field></app-search-field>
+  <app-sorting-select></app-sorting-select>
+</div>
+<div class="cards-container">
+  <div *ngFor="let recipe of recipesArray">
+    <app-recipe-card  [recipe]="recipe"></app-recipe-card>
+  </div>
+</div>
+

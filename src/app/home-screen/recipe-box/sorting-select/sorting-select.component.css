@@ -1,0 +1,15 @@
+select {
+  border-radius: 15px;
+  padding: 10px;
+  display: flex;
+  justify-items: center;
+  font-size: 0.75em;
+  border: none;
+  outline: none;
+  width: 150px;
+  outline: 1px solid black;
+}
+
+select:focus-within {
+  outline: 2px solid black;
+}

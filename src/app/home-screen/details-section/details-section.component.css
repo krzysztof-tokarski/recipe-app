@@ -1,0 +1,14 @@
+:host {
+  display: grid;
+  grid-template-rows: 50px 1fr;
+  border: 2px solid rgba(0, 0, 0, 0.767);
+  padding: 20px;
+  border-radius: 5px;
+  gap: 10px;
+}
+
+#details {
+  display: flex;
+  padding: 20px;
+}
+

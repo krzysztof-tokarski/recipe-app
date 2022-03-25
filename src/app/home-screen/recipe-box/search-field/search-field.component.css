@@ -1,0 +1,31 @@
+div {
+  width: 180px;
+  background-color: white;
+  border-radius: 15px;
+  display: grid;
+  grid-template-columns: 150px 30px;
+  align-items: center;
+  outline: 1px solid black;
+  cursor: pointer;
+}
+
+div:focus-within {
+  outline: 2px solid black;
+}
+
+input {
+  border-radius: 15px;
+  padding: 10px;
+  display: flex;
+  justify-items: center;
+  font-size: 0.75em;
+  border: none;
+  outline: none;
+  width: 150px;
+  cursor: pointer;
+}
+
+
+
+
+

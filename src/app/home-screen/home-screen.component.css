@@ -1,0 +1,10 @@
+#main {
+  width: 100vw;
+  height: 80vh;
+  display: grid;
+  padding: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  background-color: aliceblue;
+}
+

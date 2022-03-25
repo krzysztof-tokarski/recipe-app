@@ -1,0 +1,30 @@
+div {
+  display: flex;
+}
+
+button {
+  flex: 1;
+  height: 100px;
+  min-width: 200px;
+  border-width: 1px;
+  font-size: 1.5em;
+  font-family: inherit;
+  background-color: rgba(20, 22, 22, 0.822);
+  color: white;
+  cursor: pointer;
+}
+
+.add-recipe {
+  border-radius: 10px 0px 0px 10px;
+}
+
+.recipe-details {
+  border-radius: 0px 10px 10px 0px;
+}
+
+button:hover{
+  background-color: rgba(55, 64, 71, 0.602);
+  color: white;
+}
+
+
