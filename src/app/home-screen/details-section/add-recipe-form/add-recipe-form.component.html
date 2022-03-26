@@ -1,15 +1,36 @@
 <form [formGroup]="form">
-  <label for="recipeName"> Jak chcesz nazwać ten przepis?
-    <input id="recipeName" formControlName="recipeName" placeholder="Nazwa przepisu..." />
-  </label>
-  <ng-container formArrayName="description">
-    <label> Przygotowanie krok po kroku...
-    <ng-container *ngFor="let step of descriptionStepsControls; let index =index">
-        <input formControlName="description" placeholder="Następny krok...">
+  <div class="form-element">
+    <label class="form-element" for="recipeName"> Jak chcesz nazwać ten przepis?
+      <input id="recipeName" formControlName="recipeName" placeholder="Nazwa przepisu..." />
+    </label>
+  </div>
+  <div class="form-element" formArrayName="preparationSteps">
+    <label (keyup.enter)="addRecipeStep()" class="form-element" >Przygotowanie krok po kroku...
+    <ng-container *ngFor="let step of recipePreparationStepsControls">
+      <label [for] = "recipePreparationStepsControls.indexOf(step)"> {{ recipePreparationStepsControls.indexOf(step) + 1 + "."}}
+        <input [id] = "recipePreparationStepsControls.indexOf(step)"  placeholder="Następny krok...">
+        <!-- formControlName="description"  -->
+      </label>
     </ng-container>
     </label>
-  </ng-container>
-  <button type="button" (click)="addRecipeStep()">
-    Dodaj następny krok!
-  </button>
+    <button type="button" (click)="addRecipeStep()">
+      Dodaj następny krok!
+    </button>
+  </div>
+
+  <div class="form-element" formArrayName="ingredients">
+    <!-- <label (keyup.enter)="addIngredient()" class="form-element">
+      Składniki
+    </label>
+    <ng-container *ngFor="" -->
+  </div>
+
 </form>
+
+<!-- <div class="form-element" formArrayName="ingredients">
+  <label (keyup.enter)="addIngredient()" class="form-element">
+    Składniki
+  </label>
+  <ng-container *ngFor="let ingredient of ingredientsControls"></ng-container>
+</div> -->
+

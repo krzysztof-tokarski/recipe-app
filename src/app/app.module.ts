@@ -5,7 +5,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
 import { RecipeBoxComponent } from './home-screen/recipe-box/recipe-box.component';
@@ -68,7 +67,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
+    StarComponent,
     LoginFormComponent,
     HomeScreenComponent,
     RecipeBoxComponent,

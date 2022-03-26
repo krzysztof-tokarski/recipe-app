@@ -14,7 +14,7 @@ export class RecipeBoxComponent implements OnInit {
     {
       "id": 1,
       "name": "kluski z twarogiem",
-      "description": [
+      "preparationSteps": [
         "Przygotowujemy garnek wody i solimy go",
         "Gotujemy wodę",
         "Gotujemy makaron",
@@ -39,7 +39,7 @@ export class RecipeBoxComponent implements OnInit {
     {
       "id": 2,
       "name": "jajecznica",
-      "description": [
+      "preparationSteps": [
         "Rozpuszczamy masło na patelni",
         "Rozbijamy jajka i dodajemy (uwaga! bez skorupki!)",
         "Mieszamy rozbite jajka i czekamy na jajecznice"

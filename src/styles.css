@@ -1,3 +1,10 @@
+:root {
+  --accent-bgc: #041F4D;
+  --accent-fc: #EBF2FE;
+  --accent-bc: #f8efef;
+  --main-bgc: #3B82F6;
+}
+
 * {
   box-sizing: border-box;
   padding: 0px;
@@ -13,4 +20,5 @@ body {
 button:hover{
   background-color: rgba(55, 64, 71, 0.602);
   color: white;
+  cursor: pointer;
 }

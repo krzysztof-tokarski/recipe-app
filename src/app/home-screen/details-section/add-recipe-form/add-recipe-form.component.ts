@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -10,16 +10,29 @@ export class AddRecipeFormComponent implements OnInit {
 
   form!: FormGroup;
 
-  get descriptionStepsFormArray() {
-    return this.form.controls['description'] as FormArray;
+  get recipePreparationStepsFormArray() {
+    return this.form.controls['preparationSteps'] as FormArray;
   }
 
-  get descriptionStepsControls() {
-    return this.descriptionStepsFormArray.controls as FormGroup[];
+  get recipePreparationStepsControls() {
+    return this.recipePreparationStepsFormArray.controls as FormGroup[];
   }
 
   public addRecipeStep() {
-    this.descriptionStepsFormArray.push(new FormControl(''));
+    this.recipePreparationStepsFormArray.push(new FormControl(''));
+  }
+
+
+  get ingredientsFormArray() {
+    return this.form.controls['moviesWithRatings'] as FormArray;
+  }
+
+  get ingredientsControls() {
+    return this.ingredientsFormArray.controls as FormGroup[];
+  }
+
+  public addIngredient() {
+    this.ingredientsFormArray.push(new FormControl(''));
   }
 
   constructor (
@@ -36,7 +49,7 @@ export class AddRecipeFormComponent implements OnInit {
     const form = this.formBuilder.group({
       recipeName: this.formBuilder.control('',Validators.compose(
           [Validators.required, Validators.minLength(5), Validators.maxLength(80)])),
-      description: this.formBuilder.array([this.formBuilder.control('', Validators.compose(
+      preparationSteps: this.formBuilder.array([this.formBuilder.control('', Validators.compose(
         [Validators.required, Validators.minLength(5),Validators.maxLength(280)]
       ))]),
       ingredients: this.formBuilder.array([this.formBuilder.array([
@@ -48,7 +61,7 @@ export class AddRecipeFormComponent implements OnInit {
       rating: this.formBuilder.control(""),
     })
 
-    form.controls['description'] as FormArray;
+    form.controls['preparationSteps'] as FormArray;
 
     return form;
 };
