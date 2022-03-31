@@ -1,8 +1,16 @@
 
 <div id="container">
-  <app-buttons-container></app-buttons-container>
-  <div id="details">
-    <app-add-recipe-form></app-add-recipe-form>
+  <app-buttons-container (clickAddRecipeButton) = "displayAddRecipeForm()">
+    ></app-buttons-container>
+  <div #details id="details">
+    <!-- <ng-template childLoader>
+
+    </ng-template> -->
+    <app-add-recipe-form *ngIf="!currentRecipe"></app-add-recipe-form>
+    <app-recipe-details-page [recipe] = "currentRecipe" *ngIf="currentRecipe" ></app-recipe-details-page>
+    <!-- <ng-template childLoader=""></ng-template> -->
+    <!-- <app-add-recipe-form></app-add-recipe-form> -->
+    <!-- <app-recipe-details-page></app-recipe-details-page> -->
   </div>
 </div>
 

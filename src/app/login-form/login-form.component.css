@@ -5,12 +5,14 @@
   height: 80vh;
   width: 100%;
   font-size: 2em;
+  min-width: 850px;
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
+  padding: 20px;
   width: 100vw;
 }
 
@@ -20,6 +22,7 @@
   justify-items: center;
   align-items: center;
   gap: 10px;
+  position: relative;
 }
 
 ::placeholder,
@@ -41,16 +44,20 @@ button {
   font-weight: bold;
 }
 
+/* button:hover {
+
+} */
+
 .button {
   display: flex;
   justify-content: center;
 }
 
 .links > * {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   place-items: center;
-  place-content: center;
   padding: 20px;
 }
 
@@ -58,12 +65,25 @@ a {
   font-size: 0.5em;
   text-decoration: none;
   color: black;
-  text-decoration: underline;
-  text-underline-offset: 4px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 a:hover {
   color: rgb(177, 55, 55);
 }
 
+.alert {
+  color: red;
+  position: absolute;
+}
+
+.alert p {
+  position: relative;
+  width: 400px;
+  text-align: center;
+  font-size: 0.4em;
+  font-style: italic;
+  left: 0px;
+  bottom: -85px;
+}

@@ -5,7 +5,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
 import { RecipeBoxComponent } from './home-screen/recipe-box/recipe-box.component';
@@ -17,6 +16,13 @@ import { ButtonsContainerComponent } from './home-screen/details-section/buttons
 import { AddRecipeFormComponent } from './home-screen/details-section/add-recipe-form/add-recipe-form.component';
 import { RateRecipeModalComponent } from './home-screen/recipe-box/rate-recipe-modal/rate-recipe-modal.component';
 import { StarComponent } from './home-screen/recipe-box/star/star.component';
+import { RecipeDetailsPageComponent } from './home-screen/details-section/recipe-details-page/recipe-details-page.component';
+import { TransformRatingToStarsPipe } from './utilities-box/transform-rating-to-stars.pipe';
+import { TransformToUpperCasePipe } from './utilities-box/transform-to-upper-case.pipe';
+import { ChildLoaderDirective } from './utilities-box/child-loader.directive';
+import { HttpClientModule } from '@angular/common/http';
+import { LogoutButtonComponent } from './home-screen/logout-button/logout-button.component';
+// import { LoginGuard } from './utilities-box/login.guard';
 
 
 const routes: Routes = [
@@ -32,6 +38,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeScreenComponent,
+    // canActivate: [LoginGuard],
   },
   // {
   //   path: 'world',
@@ -68,7 +75,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
+    StarComponent,
     LoginFormComponent,
     HomeScreenComponent,
     RecipeBoxComponent,
@@ -80,15 +87,20 @@ const routes: Routes = [
     AddRecipeFormComponent,
     RateRecipeModalComponent,
     StarComponent,
-    StarComponent
+    RecipeDetailsPageComponent,
+    TransformRatingToStarsPipe,
+    TransformToUpperCasePipe,
+    ChildLoaderDirective,
+    LogoutButtonComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

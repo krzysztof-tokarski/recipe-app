@@ -1,0 +1,36 @@
+<div id="container">
+  <div id="top">
+    <div id="name">
+      {{recipe.name | transformToUpperCase}}
+    </div>
+    <button>
+      <div class="rating">
+        {{recipe.rating | transformRatingToStars}}
+      </div>
+    </button>
+  </div>
+  <div id="bottom">
+    <div id="prep-steps">
+      <p>
+        {{ "Przygotowanie krok po kroku:" | transformToUpperCase }}
+      </p>
+      <div class="list">
+        <p *ngFor="let step of recipe.preparationSteps; let index = index">
+          {{index+1}}. {{step}}
+        </p>
+      </div>
+    </div>
+    <div id="ingredients">
+      <p>
+        {{ "Składniki:" | transformToUpperCase }}
+      </p>
+      <div class="list">
+      <ng-container>
+        <p *ngFor="let item of recipe.ingredients; let index = index">
+          {{index+1}}. {{item.name}} / {{item.quantity}}
+        </p>
+      </ng-container>
+    </div>
+  </div>
+</div>
+

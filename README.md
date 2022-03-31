@@ -1,3 +1,9 @@
+TO BE ADDED:
+1. blur on modal popup;
+2. disallow adding next field before entering value(s) in the one above. 
+
+
+
 # 01.RecipeApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0.

@@ -1,3 +1,10 @@
+:root {
+  --accent-bgc: #02080f;
+  --accent-fc: #EBF2FE;
+  --accent-bc: #f8efef;
+  --main-bgc: #3B82F6;
+}
+
 * {
   box-sizing: border-box;
   padding: 0px;
@@ -8,9 +15,30 @@
 body {
   width: 100vw;
   height: 100vh;
+  position: relative;
+  background-color: var(--accent-bc);
 }
-
+/*
 button:hover{
   background-color: rgba(55, 64, 71, 0.602);
   color: white;
+  cursor: pointer;
+} */
+
+/* ::ng-deep */
+
+
+.container svg {
+  height: 30px;
+  width: 30px;
 }
+
+.container .star {
+  fill: white;
+}
+
+.rating svg {
+  height: 40px;
+  width: 40px;
+}
+

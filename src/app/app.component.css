@@ -1,7 +1,39 @@
-footer {
-  height: 8vh;
-  width: 100%;
-  background-color: whitesmoke;
-  border-top: 1px solid black;
+:host {
+  height: inherit;
 }
 
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  min-height: 100px;
+  min-width: 850px;
+  width: 100%;
+  background-color: var(--accent-bgc);
+  border-bottom: 10px solid orange;
+  font-size: clamp(30px, 2.5em, 3vh);
+  text-align: center;
+  color: var( --accent-fc);
+  position: fixed;
+}
+
+div {
+  height: 10vh;
+  min-height: 100px;
+  min-width: 850px;
+  width: 100%;
+}
+
+main {
+  display: flex;
+  height: 90vh;
+}
+
+/* footer {
+  position: fixed;
+  bottom: 0;
+  height: 5vh;
+  background-color: var(--accent-bgc);
+  width: 100vw;
+} */

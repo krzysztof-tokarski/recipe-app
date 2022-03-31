@@ -3,8 +3,8 @@
   <app-sorting-select></app-sorting-select>
 </div>
 <div class="cards-container">
-  <div *ngFor="let recipe of recipesArray">
+  <ng-container *ngFor="let recipe of recipesArray">
     <app-recipe-card  [recipe]="recipe"></app-recipe-card>
-  </div>
+  </ng-container>
 </div>
 

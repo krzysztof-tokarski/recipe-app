@@ -1,15 +1,77 @@
-<form [formGroup]="form">
-  <label for="recipeName"> Jak chcesz nazwać ten przepis?
-    <input id="recipeName" formControlName="recipeName" placeholder="Nazwa przepisu..." />
-  </label>
-  <ng-container formArrayName="description">
-    <label> Przygotowanie krok po kroku...
-    <ng-container *ngFor="let step of descriptionStepsControls; let index =index">
-        <input formControlName="description" placeholder="Następny krok...">
+
+<!-- (ngSubmit)="pushRecipe(form)" -->
+
+
+
+<form [formGroup]="form" (ngSubmit)="submitForm()">
+
+  <div class="form-element">
+    <label class="form-element" for="recipeName"> Jak chcesz nazwać ten przepis?
+      <label class="label-container">
+        <input id="recipeName" formControlName="recipeName" placeholder="Nazwa przepisu..." />
+      </label>
+    </label>
+  </div>
+
+  <div class="form-element" formArrayName="preparationSteps">
+    <label (keyup.enter)="addRecipeStep()" class="form-element" >
+      Przygotowanie krok po kroku...
+    <ng-container *ngFor="let control of recipePreparationStepsControls; let index = index">
+      <label class = "label-container" [for]= "recipePreparationStepsControls.indexOf(control)">
+        <!-- {{ recipePreparationStepsControls.indexOf(control) + 1 + "."}} -->
+        <input [formControlName]="index" [id] = "recipePreparationStepsControls.indexOf(control)"  placeholder="Następny krok...">
+        <button  type="button" *ngIf="index > 0"
+        (click) = "removeFromControlsArray(recipePreparationStepsFormArray,index)"> ❌ </button>
+        <div *ngIf="index == 0"></div>
+      </label>
     </ng-container>
     </label>
-  </ng-container>
-  <button type="button" (click)="addRecipeStep()">
-    Dodaj następny krok!
-  </button>
+    <button type="button" (click)="addRecipeStep()">
+      Dodaj następny krok!
+    </button>
+  </div>
+
+  <div class="form-element" formArrayName="ingredients">
+    <label (keyup.enter)="addIngredient()" class="form-element">
+      Składniki
+      <ng-container *ngFor="let control of ingredientsControls; let index = index">
+        <div class="ingredient-container"[formGroup]="control">
+          <label class="ingredient-name">
+            <!-- {{ ingredientsControls.indexOf(control) + 1 + "."}} -->
+            <input formControlName="ingredientName" placeholder="Nazwa">
+          </label>
+          <label>
+            <input formControlName="quantity" placeholder="Ilość">
+          </label>
+          <button *ngIf="index > 0"
+          (click)="removeFromControlsArray(ingredientsFormArray, index)" >
+          ❌
+          </button>
+        </div>
+      </ng-container>
+    </label>
+      <button type="button" (click)="addIngredient()">
+        Dodaj kolejny składnik!
+      </button>
+  </div>
+  <button class="submit" type="submit">Zapisz przepis</button>
 </form>
+
+<!-- <div class="form-element" formArrayName="ingredients">
+  <label (keyup.enter)="addIngredient()" class="form-element">
+    Składniki
+  </label>
+  <ng-container *ngFor="let ingredient of ingredientsControls"></ng-container>
+</div> -->
+
+
+
+
+<!--
+  {{ form.value | json }} -->
+
+<!--
+*ngIf="index > 0" -->
+
+
+<!-- (click) = "pushRecipe()"  -->
