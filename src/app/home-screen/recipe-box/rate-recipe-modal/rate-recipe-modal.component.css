@@ -114,3 +114,30 @@ g .polygon ~ .polygon {
 ::ng-deep #main {
   /* filter: blur(10px);
 */
+
+
+
+
+button:hover ~ button .polygon{
+  fill: black;
+}
+
+button:hover .polygon {
+  fill: black;
+}
+
+.stars-container {
+  transform: rotate(180deg);
+}
+
+.star {
+  transform: rotate(180deg);
+}
+
+.submit {
+  cursor: pointer;
+}
+
+.submit:hover {
+  background-color: red;
+}

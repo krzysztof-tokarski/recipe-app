@@ -18,6 +18,14 @@ body {
   position: relative;
   background-color: var(--accent-bc);
 }
+
+.selected .polygon {
+  fill: black;
+}
+
+
+
+
 /*
 button:hover{
   background-color: rgba(55, 64, 71, 0.602);
@@ -85,19 +93,3 @@ button .polygon {
   fill: gray;
 } */
 
-
-button:hover ~ button .polygon{
-  fill: black;
-}
-
-button:hover .polygon {
-  fill: black;
-}
-
-.stars-container {
-  transform: rotate(180deg);
-}
-
-button {
-  transform: rotate(180deg);
-}

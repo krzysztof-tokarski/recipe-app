@@ -1,24 +1,34 @@
 <div class="modal">
   <h2>Oceń ten przepis</h2>
   <div class="stars-container">
-    <!-- <div class="dummy"></div> -->
-    <ng-container *ngFor="let star of stars; let index = index">
-      <button class="star">
-        <app-star height="60px" width="70px">
-        </app-star>
-      </button>
-    </ng-container>
-    <!-- <div class="dummy"></div> -->
+    <button [ngClass]="{'selected': rating == 5}" id="5" (click)="onClick(5)" class="star">
+      <app-star [height]="height" [width]="width">
+      </app-star>
+    </button>
+    <button [ngClass]="{'selected': rating >= 4}" id="4" (click)="onClick(4)" class="star">
+      <app-star [height]="height" [width]="width">
+      </app-star>
+    </button>
+    <button [ngClass]="{'selected': rating >= 3}" id="3" (click)="onClick(3)" class="star">
+      <app-star [height]="height" [width]="width">
+      </app-star>
+    </button>
+    <button [ngClass]="{'selected': rating >= 2}" id="2" (click)="onClick(2)" class="star">
+      <app-star [height]="height" [width]="width">
+      </app-star>
+    </button>
+    <button [ngClass]="{'selected': rating >= 1}" id="1" (click)="onClick(1)" class="star">
+      <app-star [height]="height" [width]="width">
+      </app-star>
+    </button>
   </div>
-  <button class="submit">
+  <button [disabled]="!rating" (click)="onSubmit()" class="submit">
     Zapisz
   </button>
 </div>
 
-
-
-<div>
-  <!-- <input id="control" [formControl]="inputField" type="text" placeholder="Wyszukaj...">
+<!-- <div> -->
+<!-- <input id="control" [formControl]="inputField" type="text" placeholder="Wyszukaj...">
   <label for="control">
     🔎
   </label>

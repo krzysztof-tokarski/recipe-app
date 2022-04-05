@@ -41,9 +41,33 @@ const routes: Routes = [
     canActivate: [LoginGuard],
     children: [
       {
-        path: 'form',
-        component: AddRecipeFormComponent,
+        path: 'details',
+        component: DetailsSectionComponent,
+        children: [
+          {
+            path: 'form',
+            component: AddRecipeFormComponent,
+          },
+          {
+            path: 'recipe/:id',
+            component: RecipeDetailsPageComponent,
+            children: [
+              {
+                path: "modal",
+                component: RateRecipeModalComponent,
+              }
+            ]
+          }
+        ]
       }
+      // {
+      //   path: 'form',
+      //   component: AddRecipeFormComponent,
+      // },
+      // {
+      //   path: 'rateRecipePopUp',
+      //   component: RateRecipeModalComponent,
+      // }
     ]
   },
   // {

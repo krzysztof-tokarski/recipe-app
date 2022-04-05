@@ -4,9 +4,9 @@
       {{recipe.name | transformToUpperCase}}
     </div>
     <button>
-      <div class="rating">
+      <button routerLink="rateRecipePopUp" class="rating">
         {{recipe.rating | transformRatingToStars}}
-      </div>
+      </button>
     </button>
   </div>
   <div id="bottom">
@@ -25,12 +25,11 @@
         {{ "Składniki:" | transformToUpperCase }}
       </p>
       <div class="list">
-      <ng-container>
-        <p *ngFor="let item of recipe.ingredients; let index = index">
-          {{index+1}}. {{item.name}} / {{item.quantity}}
-        </p>
-      </ng-container>
+        <ng-container>
+          <p *ngFor="let item of recipe.ingredients; let index = index">
+            {{index+1}}. {{item.name}} / {{item.quantity}}
+          </p>
+        </ng-container>
+      </div>
     </div>
   </div>
-</div>
-
