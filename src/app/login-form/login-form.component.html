@@ -1,39 +1,53 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="container">
   <div>
-    <label  for="login">LOGIN </label>
+    <label for="login">LOGIN </label>
     <input formControlName="login" id="login" type="text" placeholder="moj.super.login">
-      <div *ngIf="form.controls['login'].invalid && form.controls['login'].touched && form.controls['login'].errors.required" class="alert">
-        <p> Podanie nazwy użytkownika jest obowiązkowe. </p>
-      </div>
-      <div *ngIf="form.controls['login'].invalid && form.controls['login'].touched && form.controls['login'].errors.minlength" class="alert">
-        <p> Nazwa użytkownika nie może być krótsza jak 6 znaków. </p>
-      </div>
-      <div *ngIf="form.controls['login'].invalid && form.controls['login'].touched && form.controls['login'].errors.maxlength" class="alert">
-        <p> Nazwa użytkownika nie może być dłuższa jak 15 znaków. </p>
-      </div>
+    <div
+      *ngIf="form.controls['login'].invalid && form.controls['login'].touched && form.controls['login'].errors.required"
+      class="alert">
+      <p> Podanie nazwy użytkownika jest obowiązkowe. </p>
+    </div>
+    <div
+      *ngIf="form.controls['login'].invalid && form.controls['login'].touched && form.controls['login'].errors.minlength"
+      class="alert">
+      <p> Nazwa użytkownika nie może być krótsza jak 6 znaków. </p>
+    </div>
+    <div
+      *ngIf="form.controls['login'].invalid && form.controls['login'].touched && form.controls['login'].errors.maxlength"
+      class="alert">
+      <p> Nazwa użytkownika nie może być dłuższa jak 15 znaków. </p>
+    </div>
   </div>
   <div>
     <label for="password">HASŁO </label>
     <input id="password" type="password" placeholder="******" formControlName="password">
-      <div *ngIf="form.controls['password'].invalid && form.controls['password'].touched && form.controls['password'].errors.required" class="alert">
-        <p> Podanie hasła użytkownika jest obowiązkowe. </p>
-      </div>
-      <div *ngIf="form.controls['password'].invalid && form.controls['password'].touched && form.controls['password'].errors.minlength" class="alert">
-        <p> Hasło użytkownika nie może być krótsze jak 6 znaków. </p>
-      </div>
-      <div *ngIf="form.controls['password'].invalid && form.controls['password'].touched && form.controls['password'].errors.maxlength" class="alert">
-        <p> Hasło użytkownika nie może być dłuższe jak 15 znaków. </p>
-      </div>
-      <div *ngIf="form.controls['password'].invalid && form.controls['password'].touched && !form.controls['password'].errors.minlength && !form.controls['password'].errors.maxlength && form.controls['password'].errors.pattern" class="alert">
-        <p> Hasło musi mieć określony pattern! </p>
-      </div>
+    <div
+      *ngIf="form.controls['password'].invalid && form.controls['password'].touched && form.controls['password'].errors.required"
+      class="alert">
+      <p> Podanie hasła użytkownika jest obowiązkowe. </p>
+    </div>
+    <div
+      *ngIf="form.controls['password'].invalid && form.controls['password'].touched && form.controls['password'].errors.minlength"
+      class="alert">
+      <p> Hasło użytkownika nie może być krótsze jak 6 znaków. </p>
+    </div>
+    <div
+      *ngIf="form.controls['password'].invalid && form.controls['password'].touched && form.controls['password'].errors.maxlength"
+      class="alert">
+      <p> Hasło użytkownika nie może być dłuższe jak 15 znaków. </p>
+    </div>
+    <div
+      *ngIf="form.controls['password'].invalid && form.controls['password'].touched && !form.controls['password'].errors.minlength && !form.controls['password'].errors.maxlength && form.controls['password'].errors.pattern"
+      class="alert">
+      <p> Hasło musi mieć określony pattern! </p>
+    </div>
   </div>
   <div class="links">
     <div>
-      <a >Nie pamiętasz hasła?</a>
-      <a >Zarejestruj się</a>
+      <a>Nie pamiętasz hasła?</a>
+      <a>Zarejestruj się</a>
     </div>
-    <div class="alert" *ngIf="submitted && loggedUser == undefined ">
+    <div class="alert" *ngIf="failed">
       <p> Nie znaleziono takiego użytkownika. </p>
     </div>
   </div>

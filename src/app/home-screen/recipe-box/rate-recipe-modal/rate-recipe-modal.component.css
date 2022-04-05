@@ -19,10 +19,9 @@
 
 .stars-container {
   display: flex;
-  gap: 10px;
 }
 
-button {
+.submit {
   width: 100px;
   height: 50px;
   font-size: 20px;
@@ -34,7 +33,84 @@ button {
   align-items: center;
 }
 
-::ng-deep #main {
-  /* filter: blur(10px); */
+.star {
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
 }
 
+
+
+
+/* .stars-container > * {
+  background-color: inherit;
+}
+
+.stars-container:hover > * {
+  background-color:red;
+}
+
+.stars-container > *:hover,
+.stars-container > *:hover ~ * {
+  background-color: inherit;
+}
+
+.stars-container > .star:hover {
+  background-color: red;;
+} */
+
+
+/* .stars-container *{
+  background-color: inherit;
+}
+
+.stars-container:hover polygon {
+  background-color: inherit;
+} */
+/*
+g .polygon {
+  fill: gray;
+}
+
+g:hover .polygon {
+  fill: black;
+}
+
+g .polygon,
+g .polygon ~ .polygon {
+  fill: gray;
+} */
+
+/* .polygon:hover {
+  fill: black;
+}
+
+.stars-container:hover .polygon {
+  fill: black;
+}
+
+
+.stars-container .polygon:hover,
+.stars-container .polygon:hover ~ .polygon{
+  fill: black;
+} */
+
+
+
+/* .stars-container .polygon {
+  fill: gray;
+}
+
+.stars-container:hover .polygon {
+  /* fill: black; */
+/* } */
+
+
+
+
+
+
+/*
+::ng-deep #main {
+  /* filter: blur(10px);
+*/

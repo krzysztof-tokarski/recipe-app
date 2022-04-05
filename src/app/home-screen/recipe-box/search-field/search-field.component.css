@@ -1,16 +1,15 @@
 div {
-  width: 180px;
-  background-color: white;
+  width: 230px;
   border-radius: 15px;
   display: grid;
-  grid-template-columns: 150px 30px;
+  grid-template-columns: 200px 30px;
   align-items: center;
   outline: 1px solid black;
-  cursor: pointer;
+  height: 40px;
 }
 
 div:focus-within {
-  outline: 2px solid black;
+  border: 2px solid red;
 }
 
 input {
@@ -21,11 +20,22 @@ input {
   font-size: 0.75em;
   border: none;
   outline: none;
-  width: 150px;
-  cursor: pointer;
+  width: 200px;
 }
 
+div,
+input {
+  background-color: rgb(233, 223, 223);
+}
 
+div:focus-within,
+input:focus-within {
+  background-color: white
+}
+
+::placeholder {
+  color: gray;
+}
 
 
 

@@ -1,7 +1,6 @@
-<select class="dropdown">
-  <option value="">Sortuj</option>
-  <option value="saab">Saab</option>
-  <option value="fiat">Fiat</option>
-  <option value="audi">Audi</option>
+<select [formControl]="sortSelect">
+  <option class="default" selected value="">Sortuj</option>
+  <option *ngFor="let option of sortOptions" [value]="option.value">
+    {{ option.label }}
+  </option>
 </select>
-

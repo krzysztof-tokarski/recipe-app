@@ -15,30 +15,36 @@ import { DetailsSectionComponent } from './home-screen/details-section/details-s
 import { ButtonsContainerComponent } from './home-screen/details-section/buttons-container/buttons-container.component';
 import { AddRecipeFormComponent } from './home-screen/details-section/add-recipe-form/add-recipe-form.component';
 import { RateRecipeModalComponent } from './home-screen/recipe-box/rate-recipe-modal/rate-recipe-modal.component';
-import { StarComponent } from './home-screen/recipe-box/star/star.component';
+import { StarComponent } from './utilities-box/star/star.component';
 import { RecipeDetailsPageComponent } from './home-screen/details-section/recipe-details-page/recipe-details-page.component';
-import { TransformRatingToStarsPipe } from './utilities-box/transform-rating-to-stars.pipe';
-import { TransformToUpperCasePipe } from './utilities-box/transform-to-upper-case.pipe';
-import { ChildLoaderDirective } from './utilities-box/child-loader.directive';
+import { TransformRatingToStarsPipe } from './utilities-box/pipes/transform-rating-to-stars.pipe';
+import { TransformToUpperCasePipe } from './utilities-box/pipes/transform-to-upper-case.pipe';
+import { ChildLoaderDirective } from './utilities-box/helpers/child-loader.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { LogoutButtonComponent } from './home-screen/logout-button/logout-button.component';
-// import { LoginGuard } from './utilities-box/login.guard';
+import { LoginGuard } from './utilities-box/db-interactions/login.guard';
 
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
-  // {
-  //   path: 'login',
-  //   component: LoginFormComponent,
-  // },
+  {
+    path: 'login',
+    component: LoginFormComponent,
+  },
   {
     path: 'home',
     component: HomeScreenComponent,
-    // canActivate: [LoginGuard],
+    canActivate: [LoginGuard],
+    children: [
+      {
+        path: 'form',
+        component: AddRecipeFormComponent,
+      }
+    ]
   },
   // {
   //   path: 'world',

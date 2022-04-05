@@ -27,7 +27,7 @@ button:hover{
 
 /* ::ng-deep */
 
-
+/*
 .container svg {
   height: 30px;
   width: 30px;
@@ -42,3 +42,62 @@ button:hover{
   width: 40px;
 }
 
+button {
+  background-color: inherit;
+  border: none;
+}
+
+button polygon {
+  fill: none;
+}
+
+button .polygon {
+  fill: inherit;
+}
+
+.polygon {
+  fill: inherit;
+}
+
+.stars-container button {
+  fill: gray;
+}
+
+/* prev siblings should be red */
+/* .stars-container:hover button {
+  fill: black;
+}
+
+.stars-container button:hover,
+.stars-container button:hover ~ button {
+  fill: black;
+} */
+
+/* .stars-container:hover button .polygon{
+  fill: gray;
+}
+
+.stars-container:hover button:hover ~ button .polygon{
+  fill: black;
+}
+
+* ~ .polygon {
+  fill: gray;
+} */
+
+
+button:hover ~ button .polygon{
+  fill: black;
+}
+
+button:hover .polygon {
+  fill: black;
+}
+
+.stars-container {
+  transform: rotate(180deg);
+}
+
+button {
+  transform: rotate(180deg);
+}

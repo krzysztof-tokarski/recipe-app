@@ -1,5 +1,5 @@
 import { ComponentRef, Pipe, PipeTransform, ViewContainerRef } from '@angular/core';
-import { StarComponent } from "../home-screen/recipe-box/star/star.component";
+import { StarComponent } from '../star/star.component'
 
 @Pipe({
   name: 'transformRatingToStars'

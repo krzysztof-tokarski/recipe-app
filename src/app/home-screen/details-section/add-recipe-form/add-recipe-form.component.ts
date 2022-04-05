@@ -1,8 +1,9 @@
+import { FormClickerService } from './../../../utilities-box/helpers/form-clicker.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { DbFetchService } from 'src/app/utilities-box/db-fetch.service';
-import { Recipe } from '../../recipe-box/recipe-interface';
+import { DbFetchService } from 'src/app/utilities-box/db-interactions/db-fetch.service';
+import { Recipe } from '../../../utilities-box/interfaces/recipe-interface';
 
 @Component({
   selector: 'app-add-recipe-form',
@@ -16,17 +17,19 @@ export class AddRecipeFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.createAddRecipeForm();
+
   }
 
-  constructor (
+  constructor(
     private formBuilder: FormBuilder,
     private dbFetchService: DbFetchService,
-    private httpClient: HttpClient
-  ) {}
+    private httpClient: HttpClient,
+    private formClicker: FormClickerService
+  ) { }
 
 
 
-  public removeFromControlsArray(array: FormArray,index: number) {
+  public removeFromControlsArray(array: FormArray, index: number) {
     array.removeAt(index);
   }
 
@@ -59,7 +62,7 @@ export class AddRecipeFormComponent implements OnInit {
   public addIngredient() {
     this.ingredientsFormArray.push(
       new FormGroup({
-        ingredientName: this.formBuilder.control(""),
+        name: this.formBuilder.control(""),
         quantity: this.formBuilder.control("")
       })
     )
@@ -67,23 +70,22 @@ export class AddRecipeFormComponent implements OnInit {
 
 
   submitForm() {
-    let x = this.form.value;
-    // console.log(x)
-    let temp1 = x.recipeName;
-    let temp2 =  x.ingredients[0].ingredientName;
+    // let x = this.form.value;
+    // // console.log(x)
+    // let temp1 = x.recipeName;
+    // let temp2 = x.ingredients[0].ingredientName;
 
-    x.recipeName = x.name;
-    x.ingredients[0].ingredientName =  x.ingredients[0].name;
-    x.name = temp1;
-    x.ingredients[0].name = temp2;
-
+    // x.recipeName = x.name;
+    // x.ingredients[0].ingredientName = x.ingredients[0].name;
+    // x.name = temp1;
+    // x.ingredients[0].name = temp2;
 
     this.httpClient
-      .post('http://localhost:3000/recipes', this.form.value).subscribe(
-        (response) => console.log(response),
-        (error) => console.log(error),
-      )
+      .post('http://localhost:3000/recipes', this.form.value).subscribe({
+        error: () => { console.log(Error) },
+      })
 
+    this.formClicker.subject.next("");
   }
 
 
@@ -92,14 +94,14 @@ export class AddRecipeFormComponent implements OnInit {
   private createAddRecipeForm() {
     const form = this.formBuilder.group({
       id: this.formBuilder.control(""),
-      recipeName: this.formBuilder.control('',Validators.compose(
-          [Validators.required, Validators.minLength(5), Validators.maxLength(80)])),
+      name: this.formBuilder.control('', Validators.compose(
+        [Validators.required, Validators.minLength(5), Validators.maxLength(80)])),
       preparationSteps: this.formBuilder.array([this.formBuilder.control('', Validators.compose(
-        [Validators.required, Validators.minLength(5),Validators.maxLength(280)]
+        [Validators.required, Validators.minLength(5), Validators.maxLength(280)]
       ))]),
       ingredients: this.formBuilder.array([
         this.formBuilder.group({
-          ingredientName: this.formBuilder.control(""),
+          name: this.formBuilder.control(""),
           quantity: this.formBuilder.control("")
         })]),
       rating: this.formBuilder.control(""),
@@ -109,7 +111,7 @@ export class AddRecipeFormComponent implements OnInit {
     form.controls['ingredients'] as FormArray;
 
     return form;
-};
+  };
 
 
 

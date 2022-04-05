@@ -1,23 +1,29 @@
-import { Component, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 
 @Component({
   selector: 'app-rate-recipe-modal',
   templateUrl: './rate-recipe-modal.component.html',
-  styleUrls: ['./rate-recipe-modal.component.css']
+  styleUrls: ['./rate-recipe-modal.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class RateRecipeModalComponent implements OnInit {
 
-  numberOfStars = Array(5).fill(0).map((x,i)=>i);
+  // @Input() rating
+  public stars = Array(5);
+
+  ratingStarsSelector = new FormControl("");
 
 
   constructor(private element: ElementRef) { }
 
-  inside = false;
+  // inside = false;
 
-  @HostListener("click")
-  clicked(event: Event) {
-
+  public rate(rating: number) {
+    console.log('rating', rating);
+    this.stars = this.stars.map((_, i) => rating > i);
+    console.log('stars', this.stars);
   }
 
 

@@ -1,10 +1,12 @@
 <div class="inputs-container">
-  <app-search-field></app-search-field>
-  <app-sorting-select></app-sorting-select>
-</div>
-<div class="cards-container">
-  <ng-container *ngFor="let recipe of recipesArray">
-    <app-recipe-card  [recipe]="recipe"></app-recipe-card>
-  </ng-container>
+  <app-search-field (searchFieldValueEmitter)="searchFieldValue = ($event)"></app-search-field>
+  <app-sorting-select (sortingSelectValueEmitter)="sortCriteria = ($event)"></app-sorting-select>
+  <!-- <app-search-field (searchFieldValueEmitter)="updateSearchFieldValue($event)"></app-search-field>
+  <app-sorting-select (sortingSelectValueEmitter)="updateSortCriteria($event)"></app-sorting-select> -->
 </div>
 
+<div class="cards-container">
+  <ng-container *ngFor="let recipe of recipesArray">
+    <app-recipe-card [recipe]="recipe"></app-recipe-card>
+  </ng-container>
+</div>

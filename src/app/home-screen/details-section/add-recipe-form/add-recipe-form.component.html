@@ -1,4 +1,3 @@
-
 <!-- (ngSubmit)="pushRecipe(form)" -->
 
 
@@ -8,23 +7,24 @@
   <div class="form-element">
     <label class="form-element" for="recipeName"> Jak chcesz nazwać ten przepis?
       <label class="label-container">
-        <input id="recipeName" formControlName="recipeName" placeholder="Nazwa przepisu..." />
+        <input id="recipeName" formControlName="name" placeholder="Nazwa przepisu..." />
       </label>
     </label>
   </div>
 
   <div class="form-element" formArrayName="preparationSteps">
-    <label (keyup.enter)="addRecipeStep()" class="form-element" >
+    <label (keyup.enter)="addRecipeStep()" class="form-element">
       Przygotowanie krok po kroku...
-    <ng-container *ngFor="let control of recipePreparationStepsControls; let index = index">
-      <label class = "label-container" [for]= "recipePreparationStepsControls.indexOf(control)">
-        <!-- {{ recipePreparationStepsControls.indexOf(control) + 1 + "."}} -->
-        <input [formControlName]="index" [id] = "recipePreparationStepsControls.indexOf(control)"  placeholder="Następny krok...">
-        <button  type="button" *ngIf="index > 0"
-        (click) = "removeFromControlsArray(recipePreparationStepsFormArray,index)"> ❌ </button>
-        <div *ngIf="index == 0"></div>
-      </label>
-    </ng-container>
+      <ng-container *ngFor="let control of recipePreparationStepsControls; let index = index">
+        <label class="label-container" [for]="recipePreparationStepsControls.indexOf(control)">
+          <!-- {{ recipePreparationStepsControls.indexOf(control) + 1 + "."}} -->
+          <input [formControlName]="index" [id]="recipePreparationStepsControls.indexOf(control)"
+            placeholder="Następny krok...">
+          <button type="button" *ngIf="index > 0"
+            (click)="removeFromControlsArray(recipePreparationStepsFormArray,index)"> ❌ </button>
+          <div *ngIf="index == 0"></div>
+        </label>
+      </ng-container>
     </label>
     <button type="button" (click)="addRecipeStep()">
       Dodaj następny krok!
@@ -35,24 +35,23 @@
     <label (keyup.enter)="addIngredient()" class="form-element">
       Składniki
       <ng-container *ngFor="let control of ingredientsControls; let index = index">
-        <div class="ingredient-container"[formGroup]="control">
+        <div class="ingredient-container" [formGroup]="control">
           <label class="ingredient-name">
             <!-- {{ ingredientsControls.indexOf(control) + 1 + "."}} -->
-            <input formControlName="ingredientName" placeholder="Nazwa">
+            <input formControlName="name" placeholder="Nazwa">
           </label>
           <label>
             <input formControlName="quantity" placeholder="Ilość">
           </label>
-          <button *ngIf="index > 0"
-          (click)="removeFromControlsArray(ingredientsFormArray, index)" >
-          ❌
+          <button *ngIf="index > 0" (click)="removeFromControlsArray(ingredientsFormArray, index)">
+            ❌
           </button>
         </div>
       </ng-container>
     </label>
-      <button type="button" (click)="addIngredient()">
-        Dodaj kolejny składnik!
-      </button>
+    <button type="button" (click)="addIngredient()">
+      Dodaj kolejny składnik!
+    </button>
   </div>
   <button class="submit" type="submit">Zapisz przepis</button>
 </form>

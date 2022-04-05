@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CardClickService } from 'src/app/utilities-box/card-click.service';
-import { Recipe } from '../recipe-interface';
+import { CardClickService } from 'src/app/utilities-box/helpers/card-click.service';
+import { Recipe } from '../../../utilities-box/interfaces/recipe-interface';
 
 
 @Component({
@@ -16,7 +16,7 @@ export class RecipeCardComponent implements OnInit {
 
   constructor(
     private cardClickService: CardClickService
-    ) { }
+  ) { }
 
   emitCardClick() {
     this.cardClickService.subject.next(this.recipe);

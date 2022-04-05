@@ -10,7 +10,9 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
 export class StarComponent implements OnInit {
 
-  @Input() fill = "";
+  @Input() width = "40px";
+  @Input() height = "40px";
+  @Input() fill = "gray";
   @Input() rating = true;
 
 

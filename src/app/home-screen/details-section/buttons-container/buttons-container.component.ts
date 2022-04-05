@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewContainerRef }from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewContainerRef } from '@angular/core';
 import { AddRecipeFormComponent } from '../add-recipe-form/add-recipe-form.component';
 import { RecipeDetailsPageComponent } from '../recipe-details-page/recipe-details-page.component';
 import { DetailsSectionComponent } from '../details-section.component';
@@ -10,6 +10,8 @@ import { DetailsSectionComponent } from '../details-section.component';
 })
 export class ButtonsContainerComponent implements OnInit {
   @Output() public clickAddRecipeButton = new EventEmitter();
+  @Input() currentUser!: any;
+  @Input() currentRecipe!: any;
 
   ngOnInit(): void {
   }
@@ -22,6 +24,8 @@ export class ButtonsContainerComponent implements OnInit {
     this.clickAddRecipeButton.emit();
   }
 
+
+
   // public displayAddRecipeForm() {
   //   this.viewContainerRef.clear();
   //   const component = this.viewContainerRef.createComponent(AddRecipeFormComponent);
@@ -33,3 +37,5 @@ export class ButtonsContainerComponent implements OnInit {
   // }
 
 }
+
+

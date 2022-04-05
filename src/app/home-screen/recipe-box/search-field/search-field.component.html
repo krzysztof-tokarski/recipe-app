@@ -1,6 +1,8 @@
 <div>
-  <input type="text" placeholder="Wyszukaj...">
-  <label>
+  <input #searchField id="control" [formControl]="inputField" type="text" placeholder="Wyszukaj...">
+  <label for="control">
     🔎
   </label>
 </div>
+
+<!-- (input)="onInput(searchField.value)" -->

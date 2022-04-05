@@ -1,7 +1,9 @@
-import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild, ViewContainerRef } from '@angular/core';
+import { UserProxy } from './../../utilities-box/helpers/user-proxy.service';
+import { LoginService } from './../../utilities-box/db-interactions/login-service.service';
+import { Component, ElementRef, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, ViewContainerRef } from '@angular/core';
 import { AddRecipeFormComponent } from './add-recipe-form/add-recipe-form.component';
-import { ChildLoaderDirective } from 'src/app/utilities-box/child-loader.directive';
-import { CardClickService } from 'src/app/utilities-box/card-click.service';
+import { ChildLoaderDirective } from 'src/app/utilities-box/helpers/child-loader.directive';
+import { CardClickService } from 'src/app/utilities-box/helpers/card-click.service';
 
 @Component({
   selector: 'app-details-section',
@@ -10,23 +12,17 @@ import { CardClickService } from 'src/app/utilities-box/card-click.service';
 })
 export class DetailsSectionComponent implements OnInit {
 
-  currentRecipe!: any;
+  @Output() currentRecipe!: any;
+  @Output() currentUser!: any;
 
   // @ViewChild (ChildLoaderDirective, {static: true, read: ViewContainerRef}) childLoader!:ViewContainerRef;
   // @ViewChild ("details", {static: true}) container!:ElementRef;
 
   constructor(
     // private viewContainerRef: ViewContainerRef,
-    private cardClickService: CardClickService
+    private cardClickService: CardClickService,
+    private userProxy: UserProxy
   ) { }
-
-  public displayRecipeDetailsPage() {
-    // const viewContainerRef = this.childLoader.viewContainerRef;
-    // viewContainerRef.clear();
-    // this.myViewContainerRef.clear();
-    // // this.container.remove();
-    // viewContainerRef.createComponent(RecipeDetailsPageComponent);
-  }
 
   public displayAddRecipeForm() {
     // this.container.remove();
@@ -42,7 +38,10 @@ export class DetailsSectionComponent implements OnInit {
     this.cardClickService.subject.subscribe((value: any) => {
       this.currentRecipe = value;
     })
-  }
 
+    this.userProxy.user$.subscribe((user) => {
+      this.currentUser = user?.role;
+    })
+  }
 
 }

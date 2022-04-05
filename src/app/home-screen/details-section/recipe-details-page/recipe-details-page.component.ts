@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Recipe } from '../../recipe-box/recipe-interface';
+import { Recipe } from '../../../utilities-box/interfaces/recipe-interface';
 
 
 @Component({
@@ -13,15 +13,15 @@ export class RecipeDetailsPageComponent implements OnInit {
 
   constructor(
 
-    ) { }
+  ) { }
 
   ngOnInit(): void {
-      // this.cardClickService.subject.subscribe((value: Recipe) => {
-      //   console.log("i also work")
-      //   this.recipe = value;
-      // })
-    }
+    // this.cardClickService.subject.subscribe((value: Recipe) => {
+    //   console.log("i also work")
+    //   this.recipe = value;
+    // })
   }
+}
 
 
   // recipe: Recipe =

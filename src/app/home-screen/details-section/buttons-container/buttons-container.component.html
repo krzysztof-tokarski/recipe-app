@@ -1,11 +1,11 @@
 <div>
-  <!-- <button (click) = "displayAddRecipeForm()" class="add-recipe"> -->
-  <button (click) = "emitAddRecipeButtonClick()" class="add-recipe">
+  <button [ngClass]="{'selected': !currentRecipe}" *ngIf='currentUser == "creator"' (click)="emitAddRecipeButtonClick()"
+    class="add-recipe">
     Dodaj przepis
   </button>
-  <button>
+  <div [ngClass]="{'selected': currentRecipe}" class="details">
     Szczegóły
-  </button>
+  </div>
 </div>
 
 <!--

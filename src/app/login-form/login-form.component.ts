@@ -1,3 +1,5 @@
+import { User } from './../utilities-box/interfaces/user-interface';
+import { UserRoles } from './../utilities-box/interfaces/user-roles';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -9,8 +11,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { first } from 'rxjs';
-import { LoginServiceService } from '../utilities-box/login-service.service';
+import { LoginService } from '../utilities-box/db-interactions/login-service.service';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 
 
@@ -24,16 +27,16 @@ export class LoginFormComponent implements OnInit {
 
   form!: any;
   submitted = false;
-  loggedUser!: any;
-
+  failed = false;
 
   // email = new FormControl('');
   // password = new FormControl('');
 
   constructor(
     private formBuider: FormBuilder,
-    private loginService: LoginServiceService,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private loginService: LoginService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -43,83 +46,127 @@ export class LoginFormComponent implements OnInit {
 
   public createForm() {
     const form = this.formBuider.group({
-      login: this.formBuider.control('',Validators.compose(
+      login: this.formBuider.control('', Validators.compose(
         [Validators.required, Validators.minLength(6), Validators.maxLength(15)])),
       password: this.formBuider.control('', Validators.compose(
         [Validators.required, Validators.minLength(6), Validators.maxLength(15), Validators.pattern(/123/)])
-    )})
+      )
+    })
 
     return form;
+  }
+
+  login(role: UserRoles) {
+    this.loginService.login(role);
+    this.router.navigate(['home']);
+  }
+
+
+  onSubmit() {
+    this.submitted = true;
+
+    if (this.form.invalid) {
+      return;
     }
 
+    let login = this.form.value.login;
+    let password = this.form.value.password;
+    let loginAttempt = { login: login, password: password };
 
-    onSubmit() {
-      this.submitted = true;
+    let loginUrl = `http://localhost:3000/users?login=${loginAttempt.login}&password=${loginAttempt.password}`
 
-      // // reset alerts on submit
-      // this.alertService.clear();
-
-      // stop here if form is invalid
-      if (this.form.invalid) {
+    this.httpClient.get<User[]>(loginUrl).subscribe(
+      response => {
+        if (response == []) {
+          this.form.reset();
+          this.failed = !this.failed;
+          setTimeout(() => {
+            this.submitted = !this.submitted;
+            this.failed = !this.failed;
+          }, 2000)
           return;
-      }
-
-      let login = this.form.value.login;
-      let password =  this.form.value.password;
-
-      let loginAttempt = {login: login, password: password};
-
-      let found;
-
-      this.httpClient
-      .get('http://localhost:3000/users').subscribe((res: any) => {
-          let users = [...res];
-          found = users.find(user => user.login == loginAttempt.login && user.password == loginAttempt.password);
-          if (found == undefined) {
-            this.form.reset();
-            setTimeout(() => {
-              this.submitted = !this.submitted;
-            }, 5000);
-            return false;
+        } else {
+          if (response[0].role == "user") {
+            this.loginService.login(UserRoles.User)
+            return this.router.navigate(["home"]);
+          } else if (response[0].role == "creator") {
+            this.loginService.login(UserRoles.Creator);
+            return this.router.navigate(["home/form"]);
           } else {
-            return this.loggedUser = found;
+            return;
           }
+        }
       })
-
-          // users.forEach(userr => {
-          //   if (userr.login == user.login && userr.password && user.password) {
-          //     console.log("true")
-          //     return;
-          //   } else {
-          //     console.log("false");
-          //   }}
-          // )
-    };
+  }
 
 
 
-      // this.httpClient
-      // .get('http://localhost:3000/users').pipe(map((res: any) =>
-      //   res.json())).subscribe(res => {
-      //     console.log(res);
-      //   });
 
 
+  // this.httpClient
+  //   .get('http://localhost:3000/users').subscribe((res: any) => {
+  //     let users = [...res];
 
-      // console.log(users);
 
-      // this.loading = true;
-      // this.loginService.login(this.form.login.value, this.form.password.value)
-      //     .pipe(first())
-      //     .subscribe({
-      //         next: () => {
-      //             // get return url from query parameters or default to home page
-      //             // const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-      //             // this.router.navigateByUrl(returnUrl);
-      //         },
-      //         error: error => {
-      //             // this.alertService.error(error);
-      //             // this.loading = false;
-      //         }
-      //     });
+  //     found = users.find(user => user.login == loginAttempt.login && user.password == loginAttempt.password);
+  // setTimeout(() => {
+
+
+  // if (found != undefined) {
+  //   this.loggedUser = found;
+  //   console.log(this.loggedUser)
+  //   if (this.loggedUser.role == "user") {
+  //     this.loginService.login(UserRoles.User)
+  //   } else {
+  //     this.loginService.login(UserRoles.Creator);
+  //   }
+  //   return this.router.navigate(["home"]);
+  // } else {
+  //   this.form.reset();
+  //   this.failed = !this.failed;
+  //   setTimeout(() => {
+  //     this.submitted = !this.submitted;
+  //     this.failed = !this.failed;
+  //   }, 2000);
+  //   return false;
+  // }
+  // }, 2000)
 }
+
+
+  // users.forEach(userr => {
+  //   if (userr.login == user.login && userr.password && user.password) {
+  //     console.log("true")
+  //     return;
+  //   } else {
+  //     console.log("false");
+  //   }}
+  // )
+
+
+
+  // this.httpClient
+  // .get('http://localhost:3000/users').pipe(map((res: any) =>
+  //   res.json())).subscribe(res => {
+  //     console.log(res);
+  //   });
+
+
+
+  // console.log(users);
+
+  // this.loading = true;
+  // this.loginService.login(this.form.login.value, this.form.password.value)
+  //     .pipe(first())
+  //     .subscribe({
+  //         next: () => {
+  //             // get return url from query parameters or default to home page
+  //             // const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+  //             // this.router.navigateByUrl(returnUrl);
+  //         },
+  //         error: error => {
+  //             // this.alertService.error(error);
+  //             // this.loading = false;
+  //         }
+  //     });
+
