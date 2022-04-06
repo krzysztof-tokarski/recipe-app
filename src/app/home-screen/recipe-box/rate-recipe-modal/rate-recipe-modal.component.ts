@@ -13,8 +13,7 @@ export class RateRecipeModalComponent implements OnInit {
 
   // @ViewChild("1") starOne: ElementRef;
 
-  recipeId = 3;
-
+  recipeId = 4;
   // rate = new FormControl('');
 
 
@@ -43,12 +42,8 @@ export class RateRecipeModalComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.httpClient
-    //   .patch(`http://localhost:3000/recipes?id=${this.recipeId}`, [{ "rating": this.rating }]);
-    // console.log(this.rating);
-    let x = this.httpClient
-      .patch(`http://localhost:3000/recipes/${this.recipeId}`, { "rating": this.rating });
-    console.log(x);
+    this.httpClient
+      .patch(`http://localhost:3000/recipes/${this.recipeId}`, { "rating": this.rating }).subscribe()
   }
 
   ngOnInit(): void {
