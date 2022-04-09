@@ -1,9 +1,9 @@
-import { FormClickerService } from './../../../utilities-box/helpers/form-clicker.service';
+import { FormClickerService } from '../../utilities-box/helpers/form-clicker.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { DbFetchService } from 'src/app/utilities-box/db-interactions/db-fetch.service';
-import { Recipe } from '../../../utilities-box/interfaces/recipe-interface';
+import { DbFetchService } from '../../utilities-box/db-interactions/db-fetch.service';
+import { Recipe } from '../../utilities-box/interfaces/recipe-interface';
 
 @Component({
   selector: 'app-add-recipe-form',
@@ -80,16 +80,12 @@ export class AddRecipeFormComponent implements OnInit {
     // x.name = temp1;
     // x.ingredients[0].name = temp2;
 
-    this.httpClient
-      .post('http://localhost:3000/recipes', this.form.value).subscribe({
-        error: () => { console.log(Error) },
-      })
-
     this.formClicker.subject.next("");
+
+    this.httpClient
+      .post('http://localhost:3000/recipes', this.form.value).subscribe();
+
   }
-
-
-
 
   private createAddRecipeForm() {
     const form = this.formBuilder.group({
@@ -105,6 +101,7 @@ export class AddRecipeFormComponent implements OnInit {
           quantity: this.formBuilder.control("")
         })]),
       rating: this.formBuilder.control(""),
+      creatorId: JSON.parse(localStorage.getItem("user")!).id
     })
 
     form.controls['preparationSteps'] as FormArray;

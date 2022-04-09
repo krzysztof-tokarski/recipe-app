@@ -1,6 +1,6 @@
 <div>
-  <button [ngClass]="{'selected': !currentRecipe}" *ngIf='currentUser == "creator"' (click)="emitAddRecipeButtonClick()"
-    class="add-recipe">
+  <button [ngClass]="{'selected': !currentRecipe}" *ngIf='currentUser.role == "creator"'
+    (click)="emitAddRecipeButtonClick()" class="add-recipe" routerLink="form">
     Dodaj przepis
   </button>
   <div [ngClass]="{'selected': currentRecipe}" class="details">

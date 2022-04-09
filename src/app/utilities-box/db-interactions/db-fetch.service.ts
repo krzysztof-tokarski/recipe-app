@@ -1,3 +1,5 @@
+import { LoginService } from './login-service.service';
+import { User } from './../interfaces/user-interface';
 import { JsonPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -15,7 +17,8 @@ export class DbFetchService {
   public subject = new Subject;
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private authService: LoginService
   ) { }
 
   // public fetchRecipes() {
@@ -37,7 +40,18 @@ export class DbFetchService {
   // }
 
 
-  public fetchRecipes(searchFieldValue?: string, sortingCriteria?: any, creatorId?: number) {
+  public fetchRecipes(searchFieldValue?: string, sortingCriteria?: any) {
+
+
+    // user?: User,
+
+    let id;
+
+    let user = JSON.parse(localStorage.getItem('user')!);
+
+    if (user.role == "creator") {
+      id = user.id;
+    }
 
     let recipesUrl = 'http://localhost:3000/recipes';
 
@@ -53,8 +67,8 @@ export class DbFetchService {
       recipesUrl = recipesUrl + `?q=${searchFieldValue}&_sort=${sortingCriteria[0]}&_order=${sortingCriteria[1]}`
     }
 
-    if (creatorId) {
-      recipesUrl = recipesUrl + `?&creatorId=${creatorId}`;
+    if (id) {
+      recipesUrl = recipesUrl + `?&creatorId=${id}`;
     }
 
     // parametryzacja

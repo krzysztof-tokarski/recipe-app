@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { ReplaySubject, Subject } from 'rxjs';
 import { Recipe } from '../interfaces/recipe-interface';
 
 @Injectable({
@@ -7,7 +7,8 @@ import { Recipe } from '../interfaces/recipe-interface';
 })
 export class CardClickService {
 
-  subject = new Subject<Recipe>();
+  subject = new ReplaySubject<Recipe>(1);
 
-  constructor() { }
+  constructor() {
+  }
 }

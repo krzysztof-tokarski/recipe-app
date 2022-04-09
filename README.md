@@ -1,6 +1,10 @@
 TO BE ADDED:
 1. blur on modal popup;
-2. disallow adding next field before entering value(s) in the one above. 
+2. disallow adding next field before entering value(s) in the one above.
+3. error handler on login without connection to db etc
+4. routerlinkactive na wybranych tabach
+5. star generator na dyrektywe
+
 
 
 

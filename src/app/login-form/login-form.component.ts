@@ -1,5 +1,5 @@
+import { UserProxy } from './../utilities-box/helpers/user-proxy.service';
 import { User } from './../utilities-box/interfaces/user-interface';
-import { UserRoles } from './../utilities-box/interfaces/user-roles';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -36,6 +36,7 @@ export class LoginFormComponent implements OnInit {
     private formBuider: FormBuilder,
     private httpClient: HttpClient,
     private loginService: LoginService,
+    private userProxy: UserProxy,
     private router: Router
   ) { }
 
@@ -43,8 +44,15 @@ export class LoginFormComponent implements OnInit {
     this.form = this.createForm();
   }
 
+  private handleError(error: Response | any) {
+    if (error.status == 0) {
+      console.log(error)
+      //or whatever condition you like to put
+    }
+  }
 
-  public createForm() {
+
+  private createForm() {
     const form = this.formBuider.group({
       login: this.formBuider.control('', Validators.compose(
         [Validators.required, Validators.minLength(6), Validators.maxLength(15)])),
@@ -56,13 +64,16 @@ export class LoginFormComponent implements OnInit {
     return form;
   }
 
-  login(role: UserRoles) {
-    this.loginService.login(role);
+  login(user: User) {
+    this.loginService.login(user);
     this.router.navigate(['home']);
   }
 
 
   onSubmit() {
+
+
+
     this.submitted = true;
 
     if (this.form.invalid) {
@@ -76,29 +87,34 @@ export class LoginFormComponent implements OnInit {
     let loginUrl = `http://localhost:3000/users?login=${loginAttempt.login}&password=${loginAttempt.password}`
 
 
-    this.httpClient.get<User[]>(loginUrl).subscribe(
-      response => {
-        if (response == []) {
-          this.form.reset();
-          this.failed = !this.failed;
-          setTimeout(() => {
-            this.submitted = !this.submitted;
+
+    this.httpClient.get<User[]>(loginUrl).
+      subscribe(
+        response => {
+          console.log(response)
+          if (response.length == 0) {
+            this.form.reset();
             this.failed = !this.failed;
-          }, 2000)
-          return;
-        } else {
-          if (response[0].role == "user") {
-            this.loginService.login(UserRoles.User)
-            return this.router.navigate(["home"]);
-          } else if (response[0].role == "creator") {
-            this.loginService.login(UserRoles.Creator);
-            return this.router.navigate(["home/form"]);
-          } else {
+            setTimeout(() => {
+              this.submitted = !this.submitted;
+              this.failed = !this.failed;
+            }, 2000)
             return;
+          } else {
+            if (response[0].role == "user") {
+              this.loginService.login(response[0]);
+              return this.router.navigate(["home"]);
+            } else if (response[0].role == "creator") {
+              this.loginService.login(response[0]);
+              return this.router.navigate(["home/form"]);
+            } else {
+              return;
+            }
           }
         }
-      })
+      )
   }
+
 
 
 

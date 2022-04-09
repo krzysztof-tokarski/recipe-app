@@ -18,8 +18,5 @@ export class HomeScreenComponent implements OnInit {
     // background.style.filter = "blur(10px)";
   }
 
-  logout() {
-    this.loginService.logout();
-  }
 
 }

@@ -1,12 +1,10 @@
-<div id="container">
+<div id="container" *ngIf="recipe">
   <div id="top">
     <div id="name">
       {{recipe.name | transformToUpperCase}}
     </div>
-    <button>
-      <button routerLink="rateRecipePopUp" class="rating">
-        {{recipe.rating | transformRatingToStars}}
-      </button>
+    <button routerLink="rateRecipe" class="rating">
+      {{recipe.rating | transformRatingToStars}}
     </button>
   </div>
   <div id="bottom">
@@ -33,3 +31,4 @@
       </div>
     </div>
   </div>
+</div>

@@ -1,9 +1,12 @@
+import { UserProxy } from './../../utilities-box/helpers/user-proxy.service';
 import { FormClickerService } from './../../utilities-box/helpers/form-clicker.service';
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { interval, of, startWith, Subscription, switchMap, map, Observable, fromEvent, mergeMap } from 'rxjs';
-import { DbFetchService } from 'src/app/utilities-box/db-interactions/db-fetch.service';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, Output } from '@angular/core';
+import { interval, of, startWith, Subscription, switchMap, map, Observable, fromEvent, mergeMap, filter } from 'rxjs';
+import { DbFetchService } from '../../utilities-box/db-interactions/db-fetch.service';
 import { Recipe } from '../../utilities-box/interfaces/recipe-interface';
+import { User } from 'src/app/utilities-box/interfaces/user-interface';
+
 
 
 @Component({
@@ -11,6 +14,8 @@ import { Recipe } from '../../utilities-box/interfaces/recipe-interface';
   templateUrl: './recipe-box.component.html',
   styleUrls: ['./recipe-box.component.css']
 })
+
+
 
 
 export class RecipeBoxComponent implements OnInit {
@@ -26,6 +31,7 @@ export class RecipeBoxComponent implements OnInit {
 
   private _sortCriteria!: any;
   private _searchFieldValue!: string;
+  // currentUser!: User;
 
   // @Input() sortCriteria!: any;
   // @Input() searchFieldValue!: string;
@@ -54,14 +60,14 @@ export class RecipeBoxComponent implements OnInit {
   // interval$ = interval(100000);
   // subscription$!: Subscription;
 
-  recipesArray!: any;
+  recipesArray!: Recipe[];
   // recipesArray!: Recipe[];
   // recipes!: Recipe[];
 
   constructor(
     private dbFetchService$: DbFetchService,
     private formClickerService: FormClickerService,
-    private httpClient: HttpClient
+    private userProxy: UserProxy,
   ) { }
 
   // fromEvent(document, "click")
@@ -92,6 +98,13 @@ export class RecipeBoxComponent implements OnInit {
   // }
 
   ngOnInit(): void {
+
+    // this.userProxy.user$
+    //   .subscribe(
+    //     user => {
+    //       // this.currentUser = user;
+    //     }
+    //   )
 
     this.callRecipes()
 

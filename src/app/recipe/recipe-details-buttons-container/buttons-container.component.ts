@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewContainerRef } from '@angular/core';
 import { AddRecipeFormComponent } from '../add-recipe-form/add-recipe-form.component';
 import { RecipeDetailsPageComponent } from '../recipe-details-page/recipe-details-page.component';
-import { DetailsSectionComponent } from '../details-section.component';
+import { DetailsSectionComponent } from '../details-section/details-section.component';
 
 @Component({
   selector: 'app-buttons-container',

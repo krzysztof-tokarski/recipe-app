@@ -1,9 +1,6 @@
-<div class = "container" (click)="emitCardClick()">
+<button class="container" (click)="emitCardClick()">
   {{recipe.name | transformToUpperCase}}
   <div class="stars">
     {{recipe.rating | transformRatingToStars}}
   </div>
-</div>
-
-
-
+</button>

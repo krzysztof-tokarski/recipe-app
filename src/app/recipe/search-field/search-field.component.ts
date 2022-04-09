@@ -1,4 +1,4 @@
-import { DbFetchService } from 'src/app/utilities-box/db-interactions/db-fetch.service';
+import { DbFetchService } from '../../utilities-box/db-interactions/db-fetch.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 

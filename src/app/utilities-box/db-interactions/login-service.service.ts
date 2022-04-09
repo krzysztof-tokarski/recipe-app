@@ -1,13 +1,14 @@
+import { User } from './../interfaces/user-interface';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { UserRoles } from '../interfaces/user-roles';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
-  private authorized!: BehaviorSubject<boolean>;
+  public authorized!: BehaviorSubject<boolean>;
+  // public authorized = new BehaviorSubject<boolean>
 
   get authorized$() {
     return this.authorized.asObservable();
@@ -17,12 +18,14 @@ export class LoginService {
     private router: Router
 
   ) {
+    // this.router.events.subscribe(console.log)
 
     this.authorized = new BehaviorSubject(!!localStorage.getItem('user'));
   }
 
-  public login(role: UserRoles) {
-    localStorage.setItem('user', JSON.stringify({ role }));
+
+  public login(user: User) {
+    localStorage.setItem('user', JSON.stringify(user));
     this.authorized.next(true);
   }
 

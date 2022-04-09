@@ -1,3 +1,7 @@
-<div>
-  <h1>PRZEPIŚNIK</h1>
+<div class="container">
+  <div></div>
+  <header>
+    PRZEPIŚNIK
+  </header>
+  <button *ngIf="logged" (click)="logout()"> {{ "Wyloguj" | transformToUpperCase}} </button>
 </div>

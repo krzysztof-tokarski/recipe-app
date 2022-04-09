@@ -6,7 +6,7 @@
     <!-- <ng-template childLoader>
 
     </ng-template> -->
-    <app-add-recipe-form *ngIf="!currentRecipe && currentUser == 'creator'"></app-add-recipe-form>
+    <!-- <app-add-recipe-form *ngIf="!currentRecipe && currentUser.role === 'creator'"></app-add-recipe-form> -->
     <app-recipe-details-page [recipe]="currentRecipe" *ngIf="currentRecipe"></app-recipe-details-page>
     <!-- <ng-template childLoader=""></ng-template> -->
     <!-- <app-add-recipe-form></app-add-recipe-form> -->
