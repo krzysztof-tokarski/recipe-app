@@ -1,6 +1,4 @@
-:host {
-  position: relative;
-}
+
 
 #main {
   width: 100vw;
@@ -15,4 +13,9 @@
   height: 100%;
   width: 20px;
   border: none;
+}
+
+.blurred {
+  filter: blur(4px);
+  pointer-events: none;
 }

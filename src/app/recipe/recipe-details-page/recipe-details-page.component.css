@@ -1,11 +1,8 @@
 :host {
-  width: 100%;
-  height: 100%;
   flex: 1;
-  color: white;
+  color:black;
   font-size: 1em;
   font-weight: bold;
-
   display: flex;
   justify-content: center;
 }
@@ -13,21 +10,19 @@
 #container {
   flex: 1;
   padding: 20px;
-  display: grid;
-  grid-template-rows: 1fr 3fr;
+  display: flex;
+  flex-direction: column;
   gap: 20px;
   border: 5px solid black;
   max-width: 800px;
-  background-color: #bfbfd198;
+  background-color: var(--card-color);
 }
 
 #name {
   font-size: 2em;
 }
 
-p {
-  font-size: 1.25em;
-}
+
 
 .list {
   font-size: 0.85em;
@@ -42,6 +37,7 @@ p {
   flex: 1;
   display: grid;
   grid-template-columns: 2fr 1fr;
+  align-items: center;
   gap: 20px;
 }
 
@@ -50,7 +46,7 @@ p {
   flex: 1;
   display: grid;
   flex-direction: column;
-  grid-template-rows: 50px 1fr;
+  grid-template-rows: 30px 1fr;
   align-self: start;
   justify-self: start;
 }
@@ -63,7 +59,16 @@ p {
   flex-shrink: 0;
   display: flex;
   flex-wrap: nowrap;
+  font-size: 1.5em;
+  align-items: center;
+  font-weight: bold;
 }
+
+button {
+  display: flex;
+  justify-content: center;
+}
+
 
 button {
   background-color: inherit;
@@ -73,6 +78,6 @@ button {
 
 button:hover {
   border-radius: 20px;
-  box-shadow: 0 0 11px 10px rgba(201, 190, 32, 0.829);
-
+  box-shadow: 0 0 11px 10px rgba(150, 150, 146, 0.829);
 }
+

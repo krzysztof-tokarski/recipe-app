@@ -1,5 +1,5 @@
 select {
-  border-radius: 15px;
+  border-radius: 5px;
   padding: 10px;
   display: flex;
   justify-items: center;
@@ -9,12 +9,12 @@ select {
   width: 230px;
   outline: 1px solid black;
   height: 40px;
-  background-color: rgb(233, 223, 223);
+  background-color: rgb(224, 218, 218);
 }
 
 select:focus-within {
   background-color: white;
-  border: 2px solid red;
+  border: 2px solid rgb(20, 20, 20);
 }
 
 

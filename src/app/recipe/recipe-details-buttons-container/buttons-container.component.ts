@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, EventEmitter, Input, OnInit, Output, ViewContainerRef } from '@angular/core';
 import { AddRecipeFormComponent } from '../add-recipe-form/add-recipe-form.component';
 import { RecipeDetailsPageComponent } from '../recipe-details-page/recipe-details-page.component';
@@ -14,14 +15,17 @@ export class ButtonsContainerComponent implements OnInit {
   @Input() currentRecipe!: any;
 
   ngOnInit(): void {
+
   }
 
   constructor(
-    private viewContainerRef: ViewContainerRef
+    // private viewContainerRef: ViewContainerRef
+    private router: Router
   ) { }
 
   emitAddRecipeButtonClick() {
-    this.clickAddRecipeButton.emit();
+    // this.clickAddRecipeButton.emit();
+    this.router.navigate(['home', 'create']);
   }
 
 

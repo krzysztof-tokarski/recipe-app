@@ -1,4 +1,7 @@
-import { ActivatedRoute } from '@angular/router';
+import { UrlRecipeLoaderService } from './../../utilities-box/helpers/url-recipe-loader.service';
+import { CardClickService } from './../../utilities-box/helpers/card-click.service';
+import { ModalGeneratorService } from './../../utilities-box/helpers/modal-generator.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, Input, OnInit } from '@angular/core';
 import { Recipe } from '../../utilities-box/interfaces/recipe-interface';
 
@@ -10,19 +13,43 @@ import { Recipe } from '../../utilities-box/interfaces/recipe-interface';
 })
 export class RecipeDetailsPageComponent implements OnInit {
 
-  @Input() public recipe!: Recipe;
-  id!: number;
+  public recipe!: Recipe;
+  // id!: number;
 
   constructor(
-    private activatedRoute: ActivatedRoute
-
+    private modalGeneratorService: ModalGeneratorService,
+    private cardClickService: CardClickService,
+    private router: Router,
+    private urlRecipeLoaderService: UrlRecipeLoaderService
   ) { }
 
-  ngOnInit(): void {
+  getRecipe() {
+    let regex = /^\/home\/recipe\/(\d+)$/
 
-    this.activatedRoute.queryParams.subscribe(params => {
-      this.id = params['id'];
-    })
+    if (this.recipe == undefined) {
+
+      let recipeId = parseInt(this.router.url.replace("/home/recipe/", ''));
+      console.log(recipeId);
+
+      if (this.router.url.match(regex)) {
+        this.urlRecipeLoaderService.replaySubject.next(recipeId);
+      } else {
+        console.log("xD")
+      }
+    }
+  }
+
+
+  ngOnInit(): void {
+    this.cardClickService.replaySubject.subscribe(
+      recipe => this.recipe = recipe
+    )
+
+    this.getRecipe()
+
+    // this.activatedRoute.queryParams.subscribe(params => {
+    //   this.id = params['id'];
+    // })
 
     // this.activatedRoute.queryParams.subscribe(params => {
     //   this.recipe = params['recipe']
@@ -32,6 +59,11 @@ export class RecipeDetailsPageComponent implements OnInit {
     //   this.recipe = value;
     // })
   }
+
+  displayModal() {
+    this.modalGeneratorService.replaySubject.next(this.recipe.id);
+  }
+
 }
 
 

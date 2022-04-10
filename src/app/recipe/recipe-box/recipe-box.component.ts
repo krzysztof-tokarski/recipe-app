@@ -1,11 +1,14 @@
+import { CardClickService } from './../../utilities-box/helpers/card-click.service';
 import { UserProxy } from './../../utilities-box/helpers/user-proxy.service';
 import { FormClickerService } from './../../utilities-box/helpers/form-clicker.service';
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit, OnChanges, SimpleChanges, Output } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, Output, AfterViewInit } from '@angular/core';
 import { interval, of, startWith, Subscription, switchMap, map, Observable, fromEvent, mergeMap, filter } from 'rxjs';
 import { DbFetchService } from '../../utilities-box/db-interactions/db-fetch.service';
 import { Recipe } from '../../utilities-box/interfaces/recipe-interface';
 import { User } from 'src/app/utilities-box/interfaces/user-interface';
+import { ModalGeneratorService } from 'src/app/utilities-box/helpers/modal-generator.service';
+import { UrlRecipeLoaderService } from 'src/app/utilities-box/helpers/url-recipe-loader.service';
 
 
 
@@ -18,7 +21,7 @@ import { User } from 'src/app/utilities-box/interfaces/user-interface';
 
 
 
-export class RecipeBoxComponent implements OnInit {
+export class RecipeBoxComponent implements OnInit, AfterViewInit {
 
   // public value$: Observable<any> = of([]);
   // subscription1$ = this.dbFetchService.fetchRecipes();
@@ -31,16 +34,26 @@ export class RecipeBoxComponent implements OnInit {
 
   private _sortCriteria!: any;
   private _searchFieldValue!: string;
+
   // currentUser!: User;
 
   // @Input() sortCriteria!: any;
   // @Input() searchFieldValue!: string;
 
   private callRecipes() {
-    this.dbFetchService$.fetchRecipes(this._searchFieldValue, this._sortCriteria).subscribe((res) => {
-      this.recipesArray = res
-    }
-    )
+    setTimeout(() => {
+      this.dbFetchService$.fetchRecipes(this._searchFieldValue, this._sortCriteria).subscribe((res) => {
+        this.recipesArray = res
+      })
+    }, 200)
+
+    setTimeout(() => {
+      this.urlRecipeLoaderService.replaySubject.subscribe(id => {
+        let requestedRecipe: any = this.recipesArray.find(recipe => recipe.id == id);
+        this.cardClickService.replaySubject.next(requestedRecipe);
+      })
+    }, 300)
+
   }
 
 
@@ -67,7 +80,10 @@ export class RecipeBoxComponent implements OnInit {
   constructor(
     private dbFetchService$: DbFetchService,
     private formClickerService: FormClickerService,
+    private modalGeneratorService: ModalGeneratorService,
     private userProxy: UserProxy,
+    private urlRecipeLoaderService: UrlRecipeLoaderService,
+    private cardClickService: CardClickService
   ) { }
 
   // fromEvent(document, "click")
@@ -109,6 +125,10 @@ export class RecipeBoxComponent implements OnInit {
     this.callRecipes()
 
     this.formClickerService.subject.subscribe(() => {
+      this.callRecipes()
+    })
+
+    this.modalGeneratorService.replaySubject.subscribe(() => {
       this.callRecipes()
     })
 
@@ -223,6 +243,13 @@ export class RecipeBoxComponent implements OnInit {
     //   this.recipesArray = [...fetch];
     // })
   }
+
+  ngAfterViewInit(): void {
+
+  }
+
+
+
 }
 
 
@@ -273,5 +300,3 @@ export class RecipeBoxComponent implements OnInit {
   //     "rating": 5
   //   }
   // ];
-
-

@@ -106,7 +106,7 @@ export class LoginFormComponent implements OnInit {
               return this.router.navigate(["home"]);
             } else if (response[0].role == "creator") {
               this.loginService.login(response[0]);
-              return this.router.navigate(["home/form"]);
+              return this.router.navigate(["home/create"]);
             } else {
               return;
             }

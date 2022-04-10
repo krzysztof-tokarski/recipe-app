@@ -1,3 +1,5 @@
+import { UrlRecipeLoaderService } from './../../utilities-box/helpers/url-recipe-loader.service';
+import { ModalGeneratorService } from 'src/app/utilities-box/helpers/modal-generator.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CardClickService } from '../../utilities-box/helpers/card-click.service';
@@ -18,21 +20,29 @@ export class RecipeCardComponent implements OnInit {
 
   @Input() public recipe!: Recipe;
 
+
   constructor(
     private cardClickService: CardClickService,
-    private activatedRoute: ActivatedRoute,
+    private modalGeneratorService: ModalGeneratorService,
     private router: Router,
   ) {
 
   }
 
   emitCardClick() {
-    console.log(this.recipe.id)
-    this.cardClickService.subject.next(this.recipe);
+    this.cardClickService.replaySubject.next(this.recipe);
     this.router.navigate(['home', 'recipe', this.recipe.id]);
   }
 
   ngOnInit(): void {
+    this.modalGeneratorService.replaySubject
+      .subscribe(
+        value => {
+          if (value == this.recipe.id) {
+            this.emitCardClick()
+          }
+        }
+      )
     // this.recipeId = this.activatedRoute.snapshot.params['id'];
 
     // this.activatedRoute.queryParams.subscribe(params => {

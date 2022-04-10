@@ -79,11 +79,11 @@ export class AddRecipeFormComponent implements OnInit {
     // x.ingredients[0].ingredientName = x.ingredients[0].name;
     // x.name = temp1;
     // x.ingredients[0].name = temp2;
-
-    this.formClicker.subject.next("");
-
     this.httpClient
-      .post('http://localhost:3000/recipes', this.form.value).subscribe();
+      .post('http://localhost:3000/recipes', this.form.value)
+      .subscribe(
+        () => this.formClicker.subject.next("")
+      );
 
   }
 

@@ -1,23 +1,23 @@
 <div class="modal">
   <h2>Oceń ten przepis</h2>
   <div class="stars-container">
-    <button [ngClass]="{'selected': rating == 5}" id="5" (click)="onClick(5)" class="star">
+    <button [ngClass]="{'selected': rating == 5}" id="5" (click)="onStarClick(5)" class="star">
       <app-star [height]="height" [width]="width">
       </app-star>
     </button>
-    <button [ngClass]="{'selected': rating >= 4}" id="4" (click)="onClick(4)" class="star">
+    <button [ngClass]="{'selected': rating >= 4}" id="4" (click)="onStarClick(4)" class="star">
       <app-star [height]="height" [width]="width">
       </app-star>
     </button>
-    <button [ngClass]="{'selected': rating >= 3}" id="3" (click)="onClick(3)" class="star">
+    <button [ngClass]="{'selected': rating >= 3}" id="3" (click)="onStarClick(3)" class="star">
       <app-star [height]="height" [width]="width">
       </app-star>
     </button>
-    <button [ngClass]="{'selected': rating >= 2}" id="2" (click)="onClick(2)" class="star">
+    <button [ngClass]="{'selected': rating >= 2}" id="2" (click)="onStarClick(2)" class="star">
       <app-star [height]="height" [width]="width">
       </app-star>
     </button>
-    <button [ngClass]="{'selected': rating >= 1}" id="1" (click)="onClick(1)" class="star">
+    <button [ngClass]="{'selected': rating >= 1}" id="1" (click)="onStarClick(1)" class="star">
       <app-star [height]="height" [width]="width">
       </app-star>
     </button>

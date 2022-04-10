@@ -7,7 +7,7 @@ import { Recipe } from '../interfaces/recipe-interface';
 })
 export class CardClickService {
 
-  subject = new ReplaySubject<Recipe>(1);
+  replaySubject = new ReplaySubject<Recipe>(1);
 
   constructor() {
   }

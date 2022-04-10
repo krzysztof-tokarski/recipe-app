@@ -2,7 +2,8 @@
   --accent-bgc: #02080f;
   --accent-fc: #EBF2FE;
   --accent-bc: #f8efef;
-  --main-bgc: #3B82F6;
+  --main-bgc: #c5cfdf;
+  --card-color: whitesmoke;
 }
 
 * {
@@ -19,8 +20,9 @@ body {
   background-color: var(--accent-bc);
 }
 
-.selected .polygon {
-  fill: black;
+
+button {
+  cursor: pointer;
 }
 
 

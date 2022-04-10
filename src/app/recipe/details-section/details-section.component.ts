@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { Recipe } from './../../utilities-box/interfaces/recipe-interface';
 import { Subscription } from 'rxjs';
 import { UserProxy } from './../../utilities-box/helpers/user-proxy.service';
 import { LoginService } from './../../utilities-box/db-interactions/login-service.service';
@@ -24,7 +26,11 @@ export class DetailsSectionComponent implements OnInit, OnDestroy {
     // private viewContainerRef: ViewContainerRef,
     private cardClickService: CardClickService,
     private userProxy: UserProxy,
-  ) { }
+    public router: Router
+  ) {
+    console.log(this.router.url);
+
+  }
 
 
 
@@ -39,16 +45,20 @@ export class DetailsSectionComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log('init')
-    this.cardClickService.subject.subscribe((value: any) => {
-      console.log(value)
-      this.currentRecipe = value;
+    this.cardClickService.replaySubject.subscribe((recipe: Recipe) => {
+      this.currentRecipe = recipe;
     })
 
     this.currentUser = JSON.parse(localStorage.getItem('user')!);
     // this.userProxy.user$?.subscribe((user) => {
     //   this.currentUser = user;
     // })
+  }
+
+
+  emitAddRecipeButtonClick() {
+    // this.clickAddRecipeButton.emit();
+    this.router.navigate(['home', 'create']);
   }
 
   ngOnDestroy(): void {

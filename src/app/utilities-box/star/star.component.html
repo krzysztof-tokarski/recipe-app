@@ -1,10 +1,10 @@
 <ng-container *ngIf="!rating">
-  <p style="color: red;">Brak oceny</p>
+  <p style="color: rgb(226, 5, 5);">{{"Brak oceny" | transformToUpperCase}}</p>
 </ng-container>
 <ng-container *ngIf="rating">
   <svg [attr.width]="width" [attr.height]="height" viewBox="0 0 20 19" version="1.1" xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>star</title>
+    <!-- <title>star</title> -->
     <desc>Created with Sketch.</desc>
     <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g id="Outlined" transform="translate(-272.000000, -4322.000000)">

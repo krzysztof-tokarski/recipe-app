@@ -1,13 +1,23 @@
 <div id="container">
-  <app-buttons-container [currentRecipe]="currentRecipe" [currentUser]="currentUser"
+  <!-- <app-buttons-container [currentRecipe]="currentRecipe" [currentUser]="currentUser"
     (clickAddRecipeButton)="displayAddRecipeForm()">
-    ></app-buttons-container>
-  <div #details id="details">
-    <!-- <ng-template childLoader>
+    ></app-buttons-container> -->
+  <div>
+    <button [ngClass]="{'selected': router.url == '/home/create'}" *ngIf='currentUser.role == "creator"'
+      (click)="emitAddRecipeButtonClick()" class="add-recipe" routerLink="form">
+      Dodaj przepis
+    </button>
+    <div [ngClass]="{'selected': router.url != '/home/create'}" class="details">
+      Szczegóły
+    </div>
+  </div>
 
+  <div #details id="details">
+    <router-outlet></router-outlet>
+    <!-- <ng-template childLoader>
     </ng-template> -->
     <!-- <app-add-recipe-form *ngIf="!currentRecipe && currentUser.role === 'creator'"></app-add-recipe-form> -->
-    <app-recipe-details-page [recipe]="currentRecipe" *ngIf="currentRecipe"></app-recipe-details-page>
+    <!-- <app-recipe-details-page [recipe]="currentRecipe" *ngIf="currentRecipe"></app-recipe-details-page>
     <!-- <ng-template childLoader=""></ng-template> -->
     <!-- <app-add-recipe-form></app-add-recipe-form> -->
     <!-- <app-recipe-details-page></app-recipe-details-page> -->

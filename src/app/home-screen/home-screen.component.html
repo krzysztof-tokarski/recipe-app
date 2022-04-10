@@ -1,9 +1,15 @@
-<div id="main">
+<div *ngIf="displayModal">
+  <app-rate-recipe-modal></app-rate-recipe-modal>
+</div>
+<div id="main" [ngClass]="{'blurred': displayModal}">
   <app-recipe-box></app-recipe-box>
-  <div id="gap"></div>
+  <div id="gap">
+  </div>
   <!-- <app-details-section></app-details-section> -->
   <div>
+    <app-details-section></app-details-section>
     <!-- details wrapper for form/details page -->
-    <router-outlet></router-outlet>
+    <!-- <router-outlet></router-outlet>
+  </div> -->
   </div>
 </div>

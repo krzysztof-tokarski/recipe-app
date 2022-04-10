@@ -18,11 +18,15 @@ h1 {
   gap: 20px;
   background-color: var(--accent-bgc);
   width: 100vw;
+  font-size: clamp(20px, 2vh, 40px);
   justify-items: center;
   align-items: center;
+  min-height: 60px;
 }
 
 button {
   height: 50px;
   width: 100px;
 }
+
+

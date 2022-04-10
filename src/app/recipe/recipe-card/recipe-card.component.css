@@ -1,6 +1,6 @@
 
 .container:hover {
-  background-color: #ffa913;
+  background-color: var(--card-color);
   transform: translate(0,-6px);
   box-shadow: 0px 0px 25px 2px #fafcff;
 }
@@ -16,15 +16,19 @@
   align-items: center;
   gap: 20px;
   cursor:pointer;
-  color: white;
+  color: black;
   font-weight: bold;
   font-size: 1.5em;
   text-align: center;
   border-radius: 15px;
-  background-color: #ee9a0ae3;
+  background-color: var(--card-color);
 }
 
 .stars {
+  height: 60px;
+  text-align: center;
+  justify-items: center;
+  align-items: center;
   padding: 5px;
   border-radius: 15px;
   gap: 5px;
