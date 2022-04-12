@@ -14,7 +14,6 @@ import { Recipe } from '../../utilities-box/interfaces/recipe-interface';
 export class RecipeDetailsPageComponent implements OnInit {
 
   public recipe!: Recipe;
-  // id!: number;
 
   constructor(
     private modalGeneratorService: ModalGeneratorService,
@@ -29,12 +28,9 @@ export class RecipeDetailsPageComponent implements OnInit {
     if (this.recipe == undefined) {
 
       let recipeId = parseInt(this.router.url.replace("/home/recipe/", ''));
-      console.log(recipeId);
 
       if (this.router.url.match(regex)) {
         this.urlRecipeLoaderService.replaySubject.next(recipeId);
-      } else {
-        console.log("xD")
       }
     }
   }

@@ -46,19 +46,11 @@ export class SortingSelectComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    // this.sortSelect.valueChanges
-    //   .pipe(map((value: string) => value.split(',')))
-    //   .subscribe(([propertyName, sortValue]) => {
 
-    //   })
     this.sortSelect.valueChanges
       .pipe(map((value: string) => value.split(',')))
       .subscribe((value) => {
         this.sortingSelectValueEmitter.emit(value)
       })
   }
-
-  // onInput(value: SortingCriteria) {
-
-  // }
 }

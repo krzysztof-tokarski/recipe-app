@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginFormComponent } from './login-form/login-form.component';
@@ -12,16 +11,13 @@ import { RecipeCardComponent } from './recipe/recipe-card/recipe-card.component'
 import { SearchFieldComponent } from './recipe/search-field/search-field.component';
 import { SortingSelectComponent } from './recipe/sorting-select/sorting-select.component';
 import { DetailsSectionComponent } from './recipe/details-section/details-section.component';
-import { ButtonsContainerComponent } from './recipe/recipe-details-buttons-container/buttons-container.component';
 import { AddRecipeFormComponent } from './recipe/add-recipe-form/add-recipe-form.component';
 import { RateRecipeModalComponent } from './recipe/rate-recipe-modal/rate-recipe-modal.component';
 import { StarComponent } from './utilities-box/star/star.component';
 import { RecipeDetailsPageComponent } from './recipe/recipe-details-page/recipe-details-page.component';
 import { TransformRatingToStarsPipe } from './utilities-box/pipes/transform-rating-to-stars.pipe';
 import { TransformToUpperCasePipe } from './utilities-box/pipes/transform-to-upper-case.pipe';
-import { ChildLoaderDirective } from './utilities-box/helpers/child-loader.directive';
 import { HttpClientModule } from '@angular/common/http';
-import { LoginGuard } from './utilities-box/db-interactions/login.guard';
 import { HeaderComponent } from './header/header.component';
 import { routes } from './app-routing.module';
 
@@ -38,14 +34,12 @@ import { routes } from './app-routing.module';
     SearchFieldComponent,
     SortingSelectComponent,
     DetailsSectionComponent,
-    ButtonsContainerComponent,
     AddRecipeFormComponent,
     RateRecipeModalComponent,
     StarComponent,
     RecipeDetailsPageComponent,
     TransformRatingToStarsPipe,
     TransformToUpperCasePipe,
-    ChildLoaderDirective,
     HeaderComponent
   ],
   imports: [

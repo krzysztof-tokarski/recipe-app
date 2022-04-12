@@ -1,9 +1,9 @@
+import { AuthenticationService } from 'src/app/utilities-box/db-interactions/authentication-service.service';
 import { FormClickerService } from '../../utilities-box/helpers/form-clicker.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { DbFetchService } from '../../utilities-box/db-interactions/db-fetch.service';
-import { Recipe } from '../../utilities-box/interfaces/recipe-interface';
+import { User } from 'src/app/utilities-box/interfaces/user-interface';
 
 @Component({
   selector: 'app-add-recipe-form',
@@ -15,16 +15,20 @@ export class AddRecipeFormComponent implements OnInit {
 
   form!: FormGroup;
 
-  ngOnInit(): void {
-    this.form = this.createAddRecipeForm();
+  currentUser!: User
 
+  ngOnInit(): void {
+    this.authenticationService.userSubject$.subscribe(
+      user => this.currentUser = user
+    )
+    this.form = this.createAddRecipeForm();
   }
 
   constructor(
     private formBuilder: FormBuilder,
-    private dbFetchService: DbFetchService,
     private httpClient: HttpClient,
-    private formClicker: FormClickerService
+    private formClicker: FormClickerService,
+    private authenticationService: AuthenticationService
   ) { }
 
 
@@ -70,21 +74,11 @@ export class AddRecipeFormComponent implements OnInit {
 
 
   submitForm() {
-    // let x = this.form.value;
-    // // console.log(x)
-    // let temp1 = x.recipeName;
-    // let temp2 = x.ingredients[0].ingredientName;
-
-    // x.recipeName = x.name;
-    // x.ingredients[0].ingredientName = x.ingredients[0].name;
-    // x.name = temp1;
-    // x.ingredients[0].name = temp2;
     this.httpClient
       .post('http://localhost:3000/recipes', this.form.value)
       .subscribe(
         () => this.formClicker.subject.next("")
       );
-
   }
 
   private createAddRecipeForm() {
@@ -101,7 +95,7 @@ export class AddRecipeFormComponent implements OnInit {
           quantity: this.formBuilder.control("")
         })]),
       rating: this.formBuilder.control(""),
-      creatorId: JSON.parse(localStorage.getItem("user")!).id
+      creatorId: this.currentUser.id
     })
 
     form.controls['preparationSteps'] as FormArray;

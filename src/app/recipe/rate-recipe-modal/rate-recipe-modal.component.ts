@@ -12,10 +12,6 @@ import { FormControl } from '@angular/forms';
 })
 export class RateRecipeModalComponent implements OnInit {
 
-  // @ViewChild("1") starOne: ElementRef;
-  // rate = new FormControl('');
-
-
   rating!: number;
   recipeId!: number | null;
   counter: number = 0;
@@ -41,15 +37,6 @@ export class RateRecipeModalComponent implements OnInit {
     }
   }
 
-  // inside = false;
-
-  // public rate(rating: number) {
-  //   console.log('rating', rating);
-  //   this.stars = this.stars.map((_, i) => rating > i);
-  //   console.log('stars', this.stars);
-  // }
-
-
   onStarClick(value: number) {
     this.rating = value;
   }
@@ -70,6 +57,4 @@ export class RateRecipeModalComponent implements OnInit {
       id => this.recipeId = id
     )
   }
-
-
 }

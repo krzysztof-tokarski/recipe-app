@@ -14,7 +14,7 @@
   gap: 60px;
   justify-content: center;
   align-items: center;
-  z-index: 2;
+  z-index: 1;
 }
 
 .stars-container {
@@ -38,6 +38,38 @@
   border: none;
   cursor: pointer;
 }
+
+
+.modal button:hover ~ button .polygon{
+  fill: black;
+}
+
+.modal button:hover .polygon {
+  fill: black;
+}
+
+.modal .stars-container {
+  transform: rotate(180deg);
+}
+
+.modal .star {
+  transform: rotate(180deg);
+}
+
+.modal .submit {
+  cursor: pointer;
+}
+
+.submit:hover {
+  background-color: black;
+  color: white
+}
+
+.modal .selected .polygon {
+  fill: black;
+}
+
+
 
 
 
@@ -107,42 +139,8 @@ g .polygon ~ .polygon {
 
 
 
-
-
-
 /*
 ::ng-deep #main {
   /* filter: blur(10px);
 */
 
-
-
-
-.modal button:hover ~ button .polygon{
-  fill: black;
-}
-
-.modal button:hover .polygon {
-  fill: black;
-}
-
-.modal .stars-container {
-  transform: rotate(180deg);
-}
-
-.modal .star {
-  transform: rotate(180deg);
-}
-
-.modal .submit {
-  cursor: pointer;
-}
-
-.submit:hover {
-  background-color: black;
-  color: white
-}
-
-.modal .selected .polygon {
-  fill: black;
-}

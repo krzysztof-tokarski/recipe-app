@@ -1,13 +1,11 @@
-import { LoginService } from './login-service.service';
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
   Router,
-  RouterStateSnapshot,
-  UrlTree,
 } from '@angular/router';
 import { Observable, take, tap } from 'rxjs';
+import { AuthenticationService } from './authentication-service.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,14 +14,14 @@ import { Observable, take, tap } from 'rxjs';
 export class LoginGuard implements CanActivate {
 
   constructor(
-    private loginService: LoginService,
+    private authenticationService: AuthenticationService,
     private router: Router
   ) { }
 
   canActivate(activatedRouteSnapshot: ActivatedRouteSnapshot) {
-    return this.loginService.authorized$.pipe(
+    return this.authenticationService.authorized$.pipe(
       take(1),
-      tap((isAuth: any) => {
+      tap((isAuth: boolean) => {
         if (isAuth) {
           return;
         }

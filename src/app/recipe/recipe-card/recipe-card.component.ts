@@ -14,10 +14,6 @@ import { Recipe } from '../../utilities-box/interfaces/recipe-interface';
 
 export class RecipeCardComponent implements OnInit {
 
-  // @Output() public clickCard = new EventEmitter();
-
-  // recipeId!: string;
-
   @Input() public recipe!: Recipe;
 
 
@@ -25,9 +21,7 @@ export class RecipeCardComponent implements OnInit {
     private cardClickService: CardClickService,
     private modalGeneratorService: ModalGeneratorService,
     private router: Router,
-  ) {
-
-  }
+  ) { }
 
   emitCardClick() {
     this.cardClickService.replaySubject.next(this.recipe);
@@ -43,11 +37,6 @@ export class RecipeCardComponent implements OnInit {
           }
         }
       )
-    // this.recipeId = this.activatedRoute.snapshot.params['id'];
-
-    // this.activatedRoute.queryParams.subscribe(params => {
-    //   this.recipe = params['recipe']
-    // })
   }
 
 }

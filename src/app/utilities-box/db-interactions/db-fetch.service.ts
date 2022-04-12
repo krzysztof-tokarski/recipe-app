@@ -1,9 +1,8 @@
-import { LoginService } from './login-service.service';
-import { User } from './../interfaces/user-interface';
-import { JsonPipe } from '@angular/common';
+import { User } from 'src/app/utilities-box/interfaces/user-interface';
+import { AuthenticationService } from './authentication-service.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Recipe } from '../interfaces/recipe-interface';
 
 
@@ -18,36 +17,18 @@ export class DbFetchService {
 
   constructor(
     private httpClient: HttpClient,
-    private authService: LoginService
+    private authenticationService: AuthenticationService
   ) { }
-
-  // public fetchRecipes() {
-  //   let fetch = this.httpClient.get(this.recipesUrl, { observe: "response" });
-
-  //   return fetch;
-  // }
-
-
-
-  // public fetchRecipes() {
-  //   let fetch = this.httpClient.get<Recipe[]>(this.recipesUrl, { observe: "response" })
-  //     .pipe(
-  //       map(response => {
-  //         return response.body
-  //       })
-  //     )
-  //   return fetch;
-  // }
-
 
   public fetchRecipes(searchFieldValue?: string, sortingCriteria?: any) {
 
-
-    // user?: User,
-
     let id;
 
-    let user = JSON.parse(localStorage.getItem('user')!);
+    let user!: User;
+
+    this.authenticationService.userSubject$.subscribe(
+      value => user = value
+    )
 
     if (user.role == "creator") {
       id = user.id;
@@ -76,39 +57,5 @@ export class DbFetchService {
 
     return search;
 
-
-    // if (searchFieldValue == undefined) {
-    //   console.log("searchfield undefined")
-    // } else {
-    //   console.log(`searchfield ${searchFieldValue}`)
-    // }
-    // if (sortingCriteria == undefined || sortingCriteria == ['']) {
-    //   console.log("sortingCriteria undefined")
-    // } else {
-    //   console.log(`sortingCriteria ${sortingCriteria}`)
-    // }
-
-    // if (value == undefined || value.length == 0) {
-    //   this.fetchRecipes();
-    //   return;
-    // }
-
-    // let recipeUrl = this.recipesUrl + `?q=${searchFieldValue}`;
-    // console.log(recipeUrl);
-
   }
-
-
-
-
-
-
-
 }
-
-
-
-  // public pushRecipe(recipe: any) {
-  //   let push  = this.httpClient.post<Recipe>(this.recipesUrl,recipe.value);
-  //   return push;
-  // }

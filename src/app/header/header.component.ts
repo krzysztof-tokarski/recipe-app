@@ -1,5 +1,5 @@
-import { LoginService } from './../utilities-box/db-interactions/login-service.service';
-import { UserProxy } from './../utilities-box/helpers/user-proxy.service';
+import { AuthenticationService } from './../utilities-box/db-interactions/authentication-service.service';
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -12,18 +12,18 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   constructor(
-    private loginService: LoginService
+    private authenticationService: AuthenticationService
   ) { }
 
-  public logged = false;
+  public logged: boolean = false;
 
 
   logout() {
-    this.loginService.logout();
+    this.authenticationService.logout();
   }
 
   ngOnInit(): void {
-    this.loginService.authorized$.subscribe(response =>
+    this.authenticationService.authorized$.subscribe(response =>
       this.logged = response
     );
   }

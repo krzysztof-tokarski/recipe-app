@@ -1,31 +1,36 @@
-import { User } from './../interfaces/user-interface';
+import { User } from '../interfaces/user-interface';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LoginService {
-  public authorized!: BehaviorSubject<boolean>;
-  // public authorized = new BehaviorSubject<boolean>
+export class AuthenticationService {
+
+  private authorized = new BehaviorSubject(false);
+  private userSubject!: BehaviorSubject<User>
 
   get authorized$() {
     return this.authorized.asObservable();
   }
 
+  get userSubject$() {
+    return this.userSubject.asObservable();
+  }
+
   constructor(
-    private router: Router
-
+    private router: Router,
   ) {
-    // this.router.events.subscribe(console.log)
 
+    this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')!));
     this.authorized = new BehaviorSubject(!!localStorage.getItem('user'));
   }
 
 
   public login(user: User) {
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('user', JSON.stringify(user))
+    this.userSubject.next(user);
     this.authorized.next(true);
   }
 

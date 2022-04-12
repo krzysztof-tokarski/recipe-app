@@ -1,5 +1,4 @@
 import { ModalGeneratorService } from './../utilities-box/helpers/modal-generator.service';
-import { LoginService } from './../utilities-box/db-interactions/login-service.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
