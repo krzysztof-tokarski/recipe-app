@@ -30,7 +30,9 @@ export class LoginFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.authenticationService.prepare()
     this.form = this.createForm();
+    localStorage.removeItem('user');
   }
 
 

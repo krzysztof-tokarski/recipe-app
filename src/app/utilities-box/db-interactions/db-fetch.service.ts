@@ -1,10 +1,9 @@
 import { User } from 'src/app/utilities-box/interfaces/user-interface';
 import { AuthenticationService } from './authentication-service.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 import { Recipe } from '../interfaces/recipe-interface';
-
+import { SortingCriteria, SortingOrder, SortingProperty } from '../interfaces/sorting-types';
 
 
 @Injectable({
@@ -13,7 +12,6 @@ import { Recipe } from '../interfaces/recipe-interface';
 
 export class DbFetchService {
 
-  public subject = new Subject;
 
   constructor(
     private httpClient: HttpClient,
@@ -25,6 +23,14 @@ export class DbFetchService {
     let id;
 
     let user!: User;
+
+    // http params
+
+    // let params = new HttpParams({fromObject});
+
+    // params.set("id", "5")
+
+    // console.log(params.get("id"))
 
     this.authenticationService.userSubject$.subscribe(
       value => user = value
@@ -53,7 +59,9 @@ export class DbFetchService {
     }
 
     // parametryzacja
+    // let search = this.httpClient.get<Recipe[]>(recipesUrl, { params })
     let search = this.httpClient.get<Recipe[]>(recipesUrl)
+
 
     return search;
 

@@ -3,6 +3,9 @@ import { FormControl } from '@angular/forms';
 import { map } from 'rxjs';
 
 
+// do wysieniesnia
+
+
 @Component({
   selector: 'app-sorting-select',
   templateUrl: './sorting-select.component.html',

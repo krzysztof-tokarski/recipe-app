@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { AuthenticationService } from './../utilities-box/db-interactions/authentication-service.service';
 
 import { Component, OnInit } from '@angular/core';
@@ -15,17 +16,17 @@ export class HeaderComponent implements OnInit {
     private authenticationService: AuthenticationService
   ) { }
 
-  public logged: boolean = false;
+  // public logged: boolean = false;
 
+  public loggedObservable = this.authenticationService.authorized$;
 
   logout() {
     this.authenticationService.logout();
   }
 
   ngOnInit(): void {
-    this.authenticationService.authorized$.subscribe(response =>
-      this.logged = response
-    );
+    // async pipe, przypisanie observable do zmiennej
+
   }
 
 }

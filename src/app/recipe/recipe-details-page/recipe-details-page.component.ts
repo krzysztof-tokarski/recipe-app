@@ -19,11 +19,18 @@ export class RecipeDetailsPageComponent implements OnInit {
     private modalGeneratorService: ModalGeneratorService,
     private cardClickService: CardClickService,
     private router: Router,
-    private urlRecipeLoaderService: UrlRecipeLoaderService
+    private urlRecipeLoaderService: UrlRecipeLoaderService,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   getRecipe() {
     let regex = /^\/home\/recipe\/(\d+)$/
+
+    // wyciaga parametr z url
+    console.log(this.activatedRoute.snapshot.params)
+
+    // sledzi zmiany
+    console.log(this.activatedRoute.params)
 
     if (this.recipe == undefined) {
 

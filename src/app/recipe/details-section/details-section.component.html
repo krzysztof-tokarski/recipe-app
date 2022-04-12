@@ -1,10 +1,9 @@
 <div id="container">
 
   <div>
-    <button [ngClass]="{'selected': router.url == '/home/create'}" *ngIf='currentUser.role == "creator"'
-      (click)="addRecipeButtonClick()" routerLink="form">
+    <a routerLinkActive="selected" *ngIf='currentUser.role == "creator"' routerLink="/home/create">
       Dodaj przepis
-    </button>
+    </a>
     <div [ngClass]="{'selected': router.url != '/home' && router.url != '/home/create'}" class="details">
       Szczegóły
     </div>

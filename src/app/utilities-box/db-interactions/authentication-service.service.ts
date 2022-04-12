@@ -8,8 +8,9 @@ import { BehaviorSubject, ReplaySubject } from 'rxjs';
 })
 export class AuthenticationService {
 
-  private authorized = new BehaviorSubject(false);
-  private userSubject!: BehaviorSubject<User>
+  private authorized!: BehaviorSubject<boolean>
+  // private userSubject!: BehaviorSubject<User>
+  private userSubject = new ReplaySubject<User>(1);
 
   get authorized$() {
     return this.authorized.asObservable();
@@ -23,10 +24,19 @@ export class AuthenticationService {
     private router: Router,
   ) {
 
-    this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')!));
-    this.authorized = new BehaviorSubject(!!localStorage.getItem('user'));
+    const userFromStorage: User | null = JSON.parse(localStorage.getItem('user')!);
+
+    if (userFromStorage) {
+      this.userSubject.next(userFromStorage)
+    }
+
+    // this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')!));
+    this.authorized = new BehaviorSubject(!!userFromStorage);
   }
 
+  public prepare() {
+    this.authorized.next(false)
+  }
 
   public login(user: User) {
     localStorage.setItem('user', JSON.stringify(user))
@@ -38,7 +48,6 @@ export class AuthenticationService {
     localStorage.removeItem('user');
     this.authorized.next(false);
     this.router.navigate(['login']);
-    window.location.reload();
   }
 }
 

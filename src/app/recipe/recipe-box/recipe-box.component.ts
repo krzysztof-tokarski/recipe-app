@@ -30,6 +30,8 @@ export class RecipeBoxComponent implements OnInit {
       })
     }, 200)
 
+    // metoda na pobieranie idywidualnych z api
+
     setTimeout(() => {
       this.urlRecipeLoaderService.replaySubject.subscribe(id => {
         let requestedRecipe: any = this.recipesArray.find(recipe => recipe.id == id);

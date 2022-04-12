@@ -1,12 +1,12 @@
 import { ModalGeneratorService } from './../utilities-box/helpers/modal-generator.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-home-screen',
   templateUrl: './home-screen.component.html',
   styleUrls: ['./home-screen.component.css']
 })
-export class HomeScreenComponent implements OnInit {
+export class HomeScreenComponent implements OnInit, OnDestroy {
 
   public displayModal = false;
 
@@ -27,6 +27,12 @@ export class HomeScreenComponent implements OnInit {
     // let background = document.querySelector("#main") as HTMLDivElement;
     // background.style.filter = "blur(10px)";
   }
+
+  ngOnDestroy(): void {
+    localStorage.removeItem('user');
+  }
+
+
 
 
 }

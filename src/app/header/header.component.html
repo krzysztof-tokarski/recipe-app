@@ -3,5 +3,5 @@
   <header>
     PRZEPIŚNIK
   </header>
-  <button *ngIf="logged" (click)="logout()"> {{ "Wyloguj" | transformToUpperCase}} </button>
+  <button *ngIf="loggedObservable | async" (click)="logout()"> {{ "Wyloguj" | transformToUpperCase}} </button>
 </div>

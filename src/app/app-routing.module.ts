@@ -9,7 +9,7 @@ import { LoginGuard } from './utilities-box/db-interactions/login.guard';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {

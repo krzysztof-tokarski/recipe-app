@@ -27,8 +27,9 @@ div {
   gap: 10px;
 }
 
-button,
+a,
 .details {
+  display: flex;
   flex: 1;
   justify-content: center;
   align-items: center;
@@ -45,10 +46,11 @@ button,
   border-radius: 5px;
 }
 
-button {
+a {
   color: black;
   background-color: azure;
   border: 10px solid rgb(34, 32, 31);
+  text-decoration: none;
 }
 
 .details {
