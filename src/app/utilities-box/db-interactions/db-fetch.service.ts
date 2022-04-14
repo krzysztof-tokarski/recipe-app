@@ -4,6 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Recipe } from '../interfaces/recipe-interface';
 import { SortingCriteria, SortingOrder, SortingProperty } from '../interfaces/sorting-types';
+import { filter, tap } from 'rxjs';
 
 
 @Injectable({
@@ -12,55 +13,48 @@ import { SortingCriteria, SortingOrder, SortingProperty } from '../interfaces/so
 
 export class DbFetchService {
 
+  private apiUrl = 'http://localhost:3000/recipes';
 
   constructor(
     private httpClient: HttpClient,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
   ) { }
 
-  public fetchRecipes(searchFieldValue?: string, sortingCriteria?: any) {
-
-    let id;
-
-    let user!: User;
-
-    // http params
-
-    // let params = new HttpParams({fromObject});
-
-    // params.set("id", "5")
-
-    // console.log(params.get("id"))
-
-    this.authenticationService.userSubject$.subscribe(
-      value => user = value
-    )
-
-    if (user.role == "creator") {
-      id = user.id;
-    }
+  public fetchRecipes(searchFieldValue?: string | undefined, sortingCriteria?: SortingCriteria) {
 
     let recipesUrl = 'http://localhost:3000/recipes';
+    let creatorId;
+
+    this.authenticationService.userSubject$.pipe(
+      filter((user => user.role == "creator"))
+    ).subscribe(
+      user => creatorId = user.id
+    )
+
+
 
     if ((sortingCriteria == undefined || sortingCriteria.length < 2) && (searchFieldValue == undefined || searchFieldValue == "")) {
 
     } else if ((sortingCriteria == undefined || sortingCriteria.length < 2) && (searchFieldValue != undefined && searchFieldValue != "")) {
       recipesUrl = recipesUrl + `?q=${searchFieldValue}`
 
-    } else if ((sortingCriteria.length == 2) && (searchFieldValue == undefined || searchFieldValue == "")) {
-      recipesUrl = recipesUrl + `?_sort=${sortingCriteria[0]}&_order=${sortingCriteria[1]}`
+    } else if ((sortingCriteria && sortingCriteria.length == 2) && (searchFieldValue == undefined || searchFieldValue == "")) {
+      recipesUrl = recipesUrl + `?_sort=${sortingCriteria}&_order=${sortingCriteria[1]}`
 
-    } else if ((sortingCriteria.length == 2) && (searchFieldValue != undefined && searchFieldValue != "")) {
-      recipesUrl = recipesUrl + `?q=${searchFieldValue}&_sort=${sortingCriteria[0]}&_order=${sortingCriteria[1]}`
+    } else if ((sortingCriteria!.length == 2) && (searchFieldValue != undefined && searchFieldValue != "")) {
+      recipesUrl = recipesUrl + `?q=${searchFieldValue}&_sort=${sortingCriteria![0]}&_order=${sortingCriteria![1]}`
     }
 
-    if (id) {
-      recipesUrl = recipesUrl + `?&creatorId=${id}`;
+    // do poprawy ta sciezka
+    if (creatorId) {
+      recipesUrl = recipesUrl + `?&creatorId=${creatorId}`;
     }
 
     // parametryzacja
     // let search = this.httpClient.get<Recipe[]>(recipesUrl, { params })
     let search = this.httpClient.get<Recipe[]>(recipesUrl)
+
+    console.log(recipesUrl)
 
 
     return search;

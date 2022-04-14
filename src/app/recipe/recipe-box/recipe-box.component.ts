@@ -1,3 +1,4 @@
+import { SortingCriteria } from 'src/app/utilities-box/interfaces/sorting-types';
 import { Router } from '@angular/router';
 import { CardClickService } from './../../utilities-box/helpers/card-click.service';
 import { FormClickerService } from './../../utilities-box/helpers/form-clicker.service';
@@ -20,13 +21,14 @@ import { UrlRecipeLoaderService } from 'src/app/utilities-box/helpers/url-recipe
 
 export class RecipeBoxComponent implements OnInit {
 
-  private _sortCriteria!: any;
+  private _sortCriteria!: SortingCriteria;
   private _searchFieldValue!: string;
 
   private callRecipes() {
     setTimeout(() => {
       this.dbFetchService$.fetchRecipes(this._searchFieldValue, this._sortCriteria).subscribe((res) => {
         this.recipesArray = res
+        console.log(this.recipesArray)
       })
     }, 200)
 
@@ -60,7 +62,6 @@ export class RecipeBoxComponent implements OnInit {
     private dbFetchService$: DbFetchService,
     private formClickerService: FormClickerService,
     private modalGeneratorService: ModalGeneratorService,
-    // private userProxy: UserProxy,
     private urlRecipeLoaderService: UrlRecipeLoaderService,
     private cardClickService: CardClickService,
     private router: Router

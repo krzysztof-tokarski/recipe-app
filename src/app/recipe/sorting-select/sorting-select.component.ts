@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { map } from 'rxjs';
+import { map, tap } from 'rxjs';
+import { SortingCriteria, SortingProperty, SortingOrder } from 'src/app/utilities-box/interfaces/sorting-types';
 
 
 // do wysieniesnia
@@ -15,9 +16,11 @@ import { map } from 'rxjs';
 
 export class SortingSelectComponent implements OnInit {
 
-  @Output() sortingSelectValueEmitter: EventEmitter<string[]> = new EventEmitter;
+  @Output() sortingSelectValueEmitter: EventEmitter<SortingCriteria> = new EventEmitter;
 
-  constructor() { }
+
+  constructor(
+  ) { }
 
   public sortSelect = new FormControl('');
 
@@ -49,10 +52,12 @@ export class SortingSelectComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-
     this.sortSelect.valueChanges
-      .pipe(map((value: string) => value.split(',')))
-      .subscribe((value) => {
+      .pipe(
+
+      )
+      .subscribe((value: SortingCriteria) => {
+        console.log(value)
         this.sortingSelectValueEmitter.emit(value)
       })
   }

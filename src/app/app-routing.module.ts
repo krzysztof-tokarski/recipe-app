@@ -26,6 +26,7 @@ export const routes: Routes = [
         redirectTo: 'home',
         pathMatch: 'full'
       },
+      // routing
       {
         path: 'create',
         component: AddRecipeFormComponent

@@ -48,6 +48,7 @@ export class AuthenticationService {
     localStorage.removeItem('user');
     this.authorized.next(false);
     this.router.navigate(['login']);
+    window.location.reload();
   }
 }
 

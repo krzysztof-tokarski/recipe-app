@@ -1,6 +1,7 @@
 import { DbFetchService } from '../../utilities-box/db-interactions/db-fetch.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-search-field',
@@ -9,34 +10,30 @@ import { FormBuilder, FormControl } from '@angular/forms';
 })
 export class SearchFieldComponent implements OnInit {
 
-  // inputField!: FormControl;
-
+  constructor(
+  ) { }
 
   inputField = new FormControl("");
 
-  @Output() searchFieldValueEmitter: EventEmitter<string> = new EventEmitter;
+  @Output() searchFieldValueEmitter: EventEmitter<string | undefined> = new EventEmitter;
 
   ngOnInit(): void {
-    this.inputField.valueChanges.subscribe((value) => {
-      this.searchFieldValueEmitter.emit(value);
-    })
+    this.inputField.valueChanges
+      // .pipe(
+      //   filter((inputValue => inputValue.trim().length > 1))
+      //   )
+      .subscribe((inputValue) => {
+        if (inputValue == "") {
+          this.searchFieldValueEmitter.emit(undefined);
+        } else {
+          this.searchFieldValueEmitter.emit(inputValue);
+        }
 
-    // this.inputField = this.formBuilder.control("")
+        console.log(inputValue)
+      })
+
   }
 
-  constructor(
-    private dbFetchService: DbFetchService,
-  ) { }
 
-  // searchRecipe(value: string) {
-  //   this.dbFetchService.searchRecipe(value);
-  // }
-
-  // onInput(value: string) {
-  //   // this.inputField.valueChanges.map(() => {
-  //   //   this.searchFieldValueEmitter.next(this.inputField.value);
-  //   // })
-  //   this.searchFieldValueEmitter.emit(value)
-  // }
 
 }
