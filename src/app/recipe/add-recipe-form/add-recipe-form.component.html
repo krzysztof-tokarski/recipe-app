@@ -47,5 +47,8 @@
       Dodaj kolejny składnik!
     </button>
   </div>
-  <button class="submit" type="submit">Zapisz przepis</button>
+  <button [disabled]="this.form.invalid" class="submit" type="submit">Zapisz przepis</button>
 </form>
+<!-- <button (click)="debugger()">adsada
+
+</button> -->

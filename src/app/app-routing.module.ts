@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+// import { GetRecipeResolver } from './ZZZZZZZZZZZZZZ get-recipe-resolver.resolver';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { AddRecipeFormComponent } from './recipe/add-recipe-form/add-recipe-form.component';
@@ -33,7 +34,10 @@ export const routes: Routes = [
       },
       {
         path: 'recipe/:id',
-        component: RecipeDetailsPageComponent
+        component: RecipeDetailsPageComponent,
+        // resolve: {
+        //   recipe: GetRecipeResolver,
+        // },
       }
     ]
   },
@@ -44,7 +48,9 @@ export const routes: Routes = [
 ]
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    urlUpdateStrategy: 'eager'
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -32,12 +32,9 @@ export class AddRecipeFormComponent implements OnInit {
   ) { }
 
 
-
   public removeFromControlsArray(array: FormArray, index: number) {
     array.removeAt(index);
   }
-
-
 
 
   get recipePreparationStepsFormArray() {
@@ -49,7 +46,8 @@ export class AddRecipeFormComponent implements OnInit {
   }
 
   public addRecipeStep() {
-    this.recipePreparationStepsFormArray.push(new FormControl(''));
+    this.recipePreparationStepsFormArray.push(new FormControl('', Validators.compose(
+      [Validators.required, Validators.minLength(5), Validators.maxLength(280)])))
   }
 
 
@@ -66,18 +64,32 @@ export class AddRecipeFormComponent implements OnInit {
   public addIngredient() {
     this.ingredientsFormArray.push(
       new FormGroup({
-        name: this.formBuilder.control(""),
-        quantity: this.formBuilder.control("")
+        name: this.formBuilder.control('', Validators.compose(
+          [Validators.required, Validators.minLength(3), Validators.maxLength(20)]
+        )),
+        quantity: this.formBuilder.control('', Validators.compose(
+          [Validators.required, Validators.minLength(3), Validators.maxLength(20)]
+        )),
       })
     )
   };
 
 
+  debugger() {
+    console.log(this.form.value);
+  }
+
   submitForm() {
+
+    this.form.value.name = this.form.value.name.toLowerCase();
+
     this.httpClient
       .post('http://localhost:3000/recipes', this.form.value)
       .subscribe(
-        () => this.formClicker.subject.next("")
+        () => {
+          this.form.reset();
+          this.formClicker.subject.next("")
+        }
       );
   }
 
@@ -91,8 +103,12 @@ export class AddRecipeFormComponent implements OnInit {
       ))]),
       ingredients: this.formBuilder.array([
         this.formBuilder.group({
-          name: this.formBuilder.control(""),
-          quantity: this.formBuilder.control("")
+          name: this.formBuilder.control('', Validators.compose(
+            [Validators.required, Validators.minLength(3), Validators.maxLength(20)]
+          )),
+          quantity: this.formBuilder.control('', Validators.compose(
+            [Validators.required, Validators.minLength(3), Validators.maxLength(20)]
+          )),
         })]),
       rating: this.formBuilder.control(""),
       creatorId: this.currentUser.id

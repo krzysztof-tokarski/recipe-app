@@ -20,44 +20,56 @@ export class DbFetchService {
     private authenticationService: AuthenticationService,
   ) { }
 
-  public fetchRecipes(searchFieldValue?: string | undefined, sortingCriteria?: SortingCriteria) {
+
+  public fetchSingleRecipe(id: number) {
+
+    const recipesUrl = 'http://localhost:3000/recipes';
+
+    const recipeInsert = `?id_gte=${id}&id_lte=${id}`;
+
+    const recipeUrl = recipesUrl + recipeInsert;
+
+    return this.httpClient.get<Recipe[]>(recipeUrl);
+  }
+
+
+
+
+
+
+
+
+  public fetchRecipes(searchFieldValue?: string, sortingCriteria?: SortingCriteria) {
 
     let recipesUrl = 'http://localhost:3000/recipes';
-    let creatorId;
 
     this.authenticationService.userSubject$.pipe(
       filter((user => user.role == "creator"))
     ).subscribe(
-      user => creatorId = user.id
+      (creator) => {
+        const creatorInsert = `?creatorId_gte=${creator.id}&creatorId_lte=${creator.id}`
+        recipesUrl = recipesUrl + creatorInsert;
+      }
     )
 
-
-
-    if ((sortingCriteria == undefined || sortingCriteria.length < 2) && (searchFieldValue == undefined || searchFieldValue == "")) {
-
-    } else if ((sortingCriteria == undefined || sortingCriteria.length < 2) && (searchFieldValue != undefined && searchFieldValue != "")) {
-      recipesUrl = recipesUrl + `?q=${searchFieldValue}`
-
-    } else if ((sortingCriteria && sortingCriteria.length == 2) && (searchFieldValue == undefined || searchFieldValue == "")) {
-      recipesUrl = recipesUrl + `?_sort=${sortingCriteria}&_order=${sortingCriteria[1]}`
-
-    } else if ((sortingCriteria!.length == 2) && (searchFieldValue != undefined && searchFieldValue != "")) {
-      recipesUrl = recipesUrl + `?q=${searchFieldValue}&_sort=${sortingCriteria![0]}&_order=${sortingCriteria![1]}`
+    if (sortingCriteria) {
+      var [sortingProperty, sortingOrder] = sortingCriteria;
     }
 
-    // do poprawy ta sciezka
-    if (creatorId) {
-      recipesUrl = recipesUrl + `?&creatorId=${creatorId}`;
+    let insert = '';
+
+    if (!sortingCriteria && searchFieldValue) {
+      insert = `&q=${searchFieldValue}`
+
+    } else if (sortingCriteria && !searchFieldValue) {
+      insert = `&_sort=${sortingProperty}&_order=${sortingOrder}`
+
+    } else if (sortingCriteria && searchFieldValue) {
+      insert = `&q=${searchFieldValue}&_sort=${sortingProperty!}&_order=${sortingOrder!}`
     }
 
-    // parametryzacja
-    // let search = this.httpClient.get<Recipe[]>(recipesUrl, { params })
-    let search = this.httpClient.get<Recipe[]>(recipesUrl)
+    recipesUrl = recipesUrl + insert;
 
-    console.log(recipesUrl)
-
-
-    return search;
-
+    return this.httpClient.get<Recipe[]>(recipesUrl);
   }
 }

@@ -47,7 +47,9 @@ import { routes } from './app-routing.module';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {
+      urlUpdateStrategy: 'eager'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent],

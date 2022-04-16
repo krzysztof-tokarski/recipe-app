@@ -101,16 +101,21 @@ input:focus {
   border-radius: 15px;
   font-weight: bold;
   color: white;
+  background-color: gray;
+  pointer-events: none;
+}
+
+.submit:enabled {
   background-color: rgb(49, 173, 24);
   outline: none;
   border: 5px solid rgb(54, 53, 53);
   font-size: 1.5em;
+  pointer-events:all;
 }
 
-.submit:hover {
+.submit:hover:enabled {
   background-color: orangered;
   transform: translate(0,-6px);
-
 }
 
 input {

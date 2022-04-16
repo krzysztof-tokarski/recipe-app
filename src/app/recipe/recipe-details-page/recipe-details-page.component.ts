@@ -1,9 +1,11 @@
+import { DbFetchService } from './../../utilities-box/db-interactions/db-fetch.service';
 import { UrlRecipeLoaderService } from './../../utilities-box/helpers/url-recipe-loader.service';
 import { CardClickService } from './../../utilities-box/helpers/card-click.service';
 import { ModalGeneratorService } from './../../utilities-box/helpers/modal-generator.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, Input, OnInit } from '@angular/core';
 import { Recipe } from '../../utilities-box/interfaces/recipe-interface';
+import { map, Subscription } from 'rxjs';
 
 
 @Component({
@@ -14,85 +16,79 @@ import { Recipe } from '../../utilities-box/interfaces/recipe-interface';
 export class RecipeDetailsPageComponent implements OnInit {
 
   public recipe!: Recipe;
+  private currentId!: number;
 
   constructor(
     private modalGeneratorService: ModalGeneratorService,
-    private cardClickService: CardClickService,
-    private router: Router,
-    private urlRecipeLoaderService: UrlRecipeLoaderService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private dbFetchService: DbFetchService
   ) { }
 
-  getRecipe() {
-    let regex = /^\/home\/recipe\/(\d+)$/
-
-    // wyciaga parametr z url
-    console.log(this.activatedRoute.snapshot.params)
-
-    // sledzi zmiany
-    console.log(this.activatedRoute.params)
-
-    if (this.recipe == undefined) {
-
-      let recipeId = parseInt(this.router.url.replace("/home/recipe/", ''));
-
-      if (this.router.url.match(regex)) {
-        this.urlRecipeLoaderService.replaySubject.next(recipeId);
-      }
-    }
+  private callRecipe(id: number) {
+    this.dbFetchService.fetchSingleRecipe(this.currentId)
+      .pipe(
+        map(value => value[0])
+      ).subscribe(
+        (value) => this.recipe = value
+      )
   }
 
-
   ngOnInit(): void {
-    this.cardClickService.replaySubject.subscribe(
-      recipe => this.recipe = recipe
+
+    this.activatedRoute.params.subscribe(
+      (result) => {
+        this.currentId = result['id']
+        this.callRecipe(this.currentId)
+      }
     )
 
-    this.getRecipe()
+    this.modalGeneratorService.replaySubject.subscribe(
+      () => this.callRecipe(this.currentId)
+    )
 
-    // this.activatedRoute.queryParams.subscribe(params => {
-    //   this.id = params['id'];
-    // })
-
-    // this.activatedRoute.queryParams.subscribe(params => {
-    //   this.recipe = params['recipe']
-    // });
-    // this.cardClickService.subject.subscribe((value: Recipe) => {
-    //   console.log("i also work")
-    //   this.recipe = value;
-    // })
   }
 
   displayModal() {
     this.modalGeneratorService.replaySubject.next(this.recipe.id);
   }
-
 }
 
 
-  // recipe: Recipe =
-  // {
-  //     "id": 1,
-  //     "name": "kluski z twarogiem",
-  //     "preparationSteps": [
-  //       "Przygotowujemy garnek wody i solimy go",
-  //       "Gotujemy wodę",
-  //       "Gotujemy makaron",
-  //       "Do ugatowanego makaronu dodajemy twaróg"
-  //     ],
-  //     "ingredients": [
-  //       {
-  //         "name": "makaron",
-  //         "quantity": "250g"
-  //       },
-  //       {
-  //         "name": "sól",
-  //         "quantity": "szczypta"
-  //       },
-  //       {
-  //         "name": "twaróg",
-  //         "quantity": "150g"
-  //       }
-  //     ],
-  //     "rating": 4
-  // }
+
+// getRecipe() {
+  // // let regex = /^\/home\/recipe\/(\d+)$/
+  // // const id = this.activatedRoute.snapshot.params['id'];
+  // let id: number;
+  // this.activatedRoute.params.subscribe(
+  //   (result) => {
+  //     id = result['id']
+  //     console.log(id)
+  //   }
+  // )
+
+
+  // // setTimeout(() => {
+  // //   this.dbFetchService.fetchSingleRecipe(id).subscribe(
+  // //     result => {
+  // //       this.recipe = result[0]
+  // //       console.log(this.recipe)
+  // //     }
+  // //   )
+  // // }, 0)
+
+
+  // // wyciaga parametr z url
+  // console.log(this.activatedRoute.snapshot.params)
+
+  // // sledzi zmiany
+  // console.log(this.activatedRoute.params)
+
+  // // if (this.recipe == undefined) {
+
+  // //   let recipeId = parseInt(this.router.url.replace("/home/recipe/", ''));
+
+  // //   if (this.router.url.match(regex)) {
+  // //     this.urlRecipeLoaderService.replaySubject.next(recipeId);
+  // //   }
+  // // }
+// }

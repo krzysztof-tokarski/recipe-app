@@ -17,12 +17,10 @@ import { UrlRecipeLoaderService } from 'src/app/utilities-box/helpers/url-recipe
 })
 
 
-
-
 export class RecipeBoxComponent implements OnInit {
 
   private _sortCriteria!: SortingCriteria;
-  private _searchFieldValue!: string;
+  private _searchFieldValue!: string | undefined;
 
   private callRecipes() {
     setTimeout(() => {
@@ -36,7 +34,7 @@ export class RecipeBoxComponent implements OnInit {
 
     setTimeout(() => {
       this.urlRecipeLoaderService.replaySubject.subscribe(id => {
-        let requestedRecipe: any = this.recipesArray.find(recipe => recipe.id == id);
+        let requestedRecipe: Recipe | undefined = this.recipesArray.find(recipe => recipe.id == id);
         if (requestedRecipe == undefined) {
           this.router.navigate(['home'])
         } else {
@@ -46,12 +44,12 @@ export class RecipeBoxComponent implements OnInit {
     }, 300)
   }
 
-  @Input() set sortCriteria(value: any) {
+  @Input() set sortCriteria(value: SortingCriteria) {
     this._sortCriteria = value;
     this.callRecipes()
   }
 
-  @Input() set searchFieldValue(value: any) {
+  @Input() set searchFieldValue(value: string | undefined) {
     this._searchFieldValue = value;
     this.callRecipes()
   }

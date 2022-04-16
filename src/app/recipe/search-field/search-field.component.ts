@@ -28,8 +28,6 @@ export class SearchFieldComponent implements OnInit {
         } else {
           this.searchFieldValueEmitter.emit(inputValue);
         }
-
-        console.log(inputValue)
       })
 
   }
