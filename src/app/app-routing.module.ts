@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-// import { GetRecipeResolver } from './ZZZZZZZZZZZZZZ get-recipe-resolver.resolver';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { AddRecipeFormComponent } from './recipe/add-recipe-form/add-recipe-form.component';
 import { RecipeDetailsPageComponent } from './recipe/recipe-details-page/recipe-details-page.component';
 import { LoginGuard } from './utilities-box/db-interactions/login.guard';
+import { RoleGuard } from './utilities-box/user-role-guard/user-role.guard';
 
 export const routes: Routes = [
   {
@@ -27,17 +27,15 @@ export const routes: Routes = [
         redirectTo: 'home',
         pathMatch: 'full'
       },
-      // routing
       {
         path: 'create',
-        component: AddRecipeFormComponent
+        component: AddRecipeFormComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ["creator"] },
       },
       {
         path: 'recipe/:id',
         component: RecipeDetailsPageComponent,
-        // resolve: {
-        //   recipe: GetRecipeResolver,
-        // },
       }
     ]
   },
@@ -49,7 +47,7 @@ export const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    urlUpdateStrategy: 'eager'
+    // urlUpdateStrategy: 'eager'
   })],
   exports: [RouterModule]
 })

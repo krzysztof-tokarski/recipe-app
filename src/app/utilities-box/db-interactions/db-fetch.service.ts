@@ -1,10 +1,9 @@
-import { User } from 'src/app/utilities-box/interfaces/user-interface';
 import { AuthenticationService } from './authentication-service.service';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Recipe } from '../interfaces/recipe-interface';
-import { SortingCriteria, SortingOrder, SortingProperty } from '../interfaces/sorting-types';
-import { filter, tap } from 'rxjs';
+import { SortingCriteria } from '../interfaces/sorting-types';
+import { filter } from 'rxjs';
 
 
 @Injectable({

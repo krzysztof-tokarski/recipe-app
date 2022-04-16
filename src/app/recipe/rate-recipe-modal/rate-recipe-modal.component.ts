@@ -1,7 +1,6 @@
 import { ModalGeneratorService } from './../../utilities-box/helpers/modal-generator.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewEncapsulation, Output, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
 
 
 @Component({

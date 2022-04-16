@@ -1,7 +1,7 @@
 <div id="container">
 
   <div>
-    <a routerLinkActive="selected" *ngIf='currentUser.role == "creator"' routerLink="/home/create">
+    <a routerLinkActive="selected" *ngIf='currentUser.role == "creator"' routerLink="create">
       Dodaj przepis
     </a>
     <div [ngClass]="{'selected': router.url != '/home' && router.url != '/home/create'}" class="details">

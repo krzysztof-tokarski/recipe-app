@@ -81,11 +81,10 @@ export class LoginFormComponent implements OnInit {
             return;
           } else {
             let user = response[0];
+            this.authenticationService.login(user);
             if (user.role == "user") {
-              this.authenticationService.login(user);
               return this.router.navigate(["home"]);
             } else if (user.role == "creator") {
-              this.authenticationService.login(user);
               return this.router.navigate(["home/create"]);
             } else {
               return;

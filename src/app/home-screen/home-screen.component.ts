@@ -23,9 +23,6 @@ export class HomeScreenComponent implements OnInit, OnDestroy {
       .subscribe(
         () => this.getModalClick()
       )
-
-    // let background = document.querySelector("#main") as HTMLDivElement;
-    // background.style.filter = "blur(10px)";
   }
 
   ngOnDestroy(): void {
