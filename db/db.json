@@ -1,0 +1,380 @@
+{
+  "recipes": [
+    {
+      "id": 1,
+      "name": "kluski z twarogiem",
+      "preparationSteps": [
+        "Przygotowujemy garnek wody i solimy go",
+        "Gotujemy wodę",
+        "Gotujemy makaron",
+        "Do ugatowanego makaronu dodajemy twaróg"
+      ],
+      "ingredients": [
+        {
+          "name": "makaron",
+          "quantity": "250g"
+        },
+        {
+          "name": "sól",
+          "quantity": "szczypta"
+        },
+        {
+          "name": "twaróg",
+          "quantity": "150g"
+        }
+      ],
+      "rating": 4,
+      "creatorId": 3
+    },
+    {
+      "id": 2,
+      "name": "jajecznica",
+      "preparationSteps": [
+        "Rozpuszczamy masło na patelni",
+        "Rozbijamy jajka i dodajemy (uwaga! bez skorupki!)",
+        "Mieszamy rozbite jajka i czekamy na jajecznice"
+      ],
+      "ingredients": [
+        {
+          "name": "jajka",
+          "quantity": "3 szt."
+        },
+        {
+          "name": "masło",
+          "quantity": "łyżeczka"
+        }
+      ],
+      "rating": 5,
+      "creatorId": 3
+    },
+    {
+      "id": 3,
+      "name": "spaghetti",
+      "preparationSteps": [
+        "jadssadsada",
+        "asddsa"
+      ],
+      "ingredients": [
+        {
+          "name": "asdsad",
+          "quantity": "asdasdsad"
+        },
+        {
+          "name": "asdasda",
+          "quantity": "asdasdsa"
+        }
+      ],
+      "rating": 5,
+      "creatorId": 2
+    },
+    {
+      "id": 4,
+      "name": "chleb",
+      "preparationSteps": [
+        "asdsad",
+        "asddsa",
+        "asdda"
+      ],
+      "ingredients": [
+        {
+          "name": "asddsa",
+          "quantity": "adsada"
+        },
+        {
+          "name": "asdsada",
+          "quantity": "asddsa"
+        },
+        {
+          "name": "",
+          "quantity": ""
+        }
+      ],
+      "rating": 4,
+      "creatorId": 2
+    },
+    {
+      "id": 5,
+      "name": "nowy przepis",
+      "preparationSteps": [
+        "adsasdasd",
+        ""
+      ],
+      "ingredients": [
+        {
+          "name": "asdsadsad",
+          "quantity": "asdsadsad"
+        }
+      ],
+      "rating": 5,
+      "creatorId": 2
+    },
+    {
+      "id": 6,
+      "name": "asdasdsad",
+      "preparationSteps": [
+        "adasdasdadasdas"
+      ],
+      "ingredients": [
+        {
+          "name": "asdasdasdasd",
+          "quantity": "adsadsada"
+        }
+      ],
+      "rating": 4,
+      "creatorId": 2
+    },
+    {
+      "id": 7,
+      "name": "asdasda",
+      "preparationSteps": [
+        "asdadasa"
+      ],
+      "ingredients": [
+        {
+          "name": "asdsada",
+          "quantity": "asdadsad"
+        }
+      ],
+      "rating": 3,
+      "creatorId": 2
+    },
+    {
+      "id": 8,
+      "name": "asdasda",
+      "preparationSteps": [
+        "asdadasa"
+      ],
+      "ingredients": [
+        {
+          "name": "asdsada",
+          "quantity": "asdadsad"
+        }
+      ],
+      "rating": 3,
+      "creatorId": 2
+    },
+    {
+      "id": 9,
+      "name": "chleb2",
+      "preparationSteps": [
+        "asdsadad",
+        "asdsadsada"
+      ],
+      "ingredients": [
+        {
+          "name": "adssadsad",
+          "quantity": "adasdsadsad"
+        },
+        {
+          "name": "asdsadsad",
+          "quantity": "asdsadsad"
+        }
+      ],
+      "rating": 4,
+      "creatorId": 2
+    },
+    {
+      "id": 10,
+      "name": "spaghetti",
+      "preparationSteps": [
+        "asdadadadas",
+        "asdadadad"
+      ],
+      "ingredients": [
+        {
+          "name": "asdsadsadsadasd",
+          "quantity": "asdadadas"
+        },
+        {
+          "name": "asdadasda",
+          "quantity": "asdsadasdasda"
+        }
+      ],
+      "rating": 5,
+      "creatorId": 2
+    },
+    {
+      "id": 11,
+      "name": "placki z twarogiem",
+      "preparationSteps": [
+        "asdsadada",
+        "asdasdadada"
+      ],
+      "ingredients": [
+        {
+          "name": "adasdsadasdas",
+          "quantity": "adasdssadasdasd"
+        }
+      ],
+      "rating": 5,
+      "creatorId": 3
+    },
+    {
+      "id": 12,
+      "name": "twarog z plackami",
+      "preparationSteps": [
+        "adsadsadasdsa",
+        "adsadsadasd"
+      ],
+      "ingredients": [
+        {
+          "name": "adssadasd",
+          "quantity": "adasdssadasdasdasdsada"
+        }
+      ],
+      "rating": 2,
+      "creatorId": 3
+    },
+    {
+      "id": 13,
+      "name": "płatki z mlekiem",
+      "preparationSteps": [
+        "Wez miske i wsyp platyki",
+        "Wlej mleko"
+      ],
+      "ingredients": [
+        {
+          "name": "Platki",
+          "quantity": "miska"
+        },
+        {
+          "name": "Mleko",
+          "quantity": "tyle, ile trzeba"
+        }
+      ],
+      "rating": 4,
+      "creatorId": 2
+    },
+    {
+      "id": 14,
+      "name": "aaaaa",
+      "preparationSteps": [
+        ""
+      ],
+      "ingredients": [
+        {
+          "name": "",
+          "quantity": ""
+        }
+      ],
+      "rating": 3,
+      "creatorId": 2
+    },
+    {
+      "id": 15,
+      "name": "bbbbccc",
+      "preparationSteps": [
+        "AAaaaa"
+      ],
+      "ingredients": [
+        {
+          "name": "AaaaA",
+          "quantity": "aaaa"
+        }
+      ],
+      "rating": 4,
+      "creatorId": 2
+    },
+    {
+      "id": 16,
+      "name": "ccccccccccccccccccc",
+      "preparationSteps": [
+        "CCCCCCCCCCC"
+      ],
+      "ingredients": [
+        {
+          "name": "CCCCCCCCc",
+          "quantity": "CCCCCCCCcc"
+        }
+      ],
+      "rating": 4,
+      "creatorId": 2
+    },
+    {
+      "id": 17,
+      "name": "chleb",
+      "preparationSteps": [
+        "Upiecz go dobrze"
+      ],
+      "ingredients": [
+        {
+          "name": "1",
+          "quantity": "2"
+        }
+      ],
+      "rating": 3,
+      "creatorId": 2
+    },
+    {
+      "id": 18,
+      "name": "chleb",
+      "preparationSteps": [
+        "Upiecz go dobrze",
+        "Upiecz go dobrze jescze raz"
+      ],
+      "ingredients": [
+        {
+          "name": "Maka",
+          "quantity": "1kg"
+        },
+        {
+          "name": "Woda",
+          "quantity": "Dwa litry"
+        }
+      ],
+      "rating": 3,
+      "creatorId": 2
+    },
+    {
+      "id": 19,
+      "name": "croissant",
+      "preparationSteps": [
+        "Kup w biedrze"
+      ],
+      "ingredients": [
+        {
+          "name": "Kasiorka",
+          "quantity": "1.5zl"
+        }
+      ],
+      "rating": 4,
+      "creatorId": 3
+    },
+    {
+      "id": 20,
+      "name": "chleb",
+      "preparationSteps": [
+        "asdsada",
+        "asdsadads"
+      ],
+      "ingredients": [
+        {
+          "name": "asdasda",
+          "quantity": "asdasdasda"
+        }
+      ],
+      "rating": 5,
+      "creatorId": 2
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "login": "user123",
+      "password": "123user",
+      "role": "user"
+    },
+    {
+      "id": 2,
+      "login": "creator123",
+      "password": "123creator",
+      "role": "creator"
+    },
+    {
+      "id": 3,
+      "login": "creator1234",
+      "password": "1234creator",
+      "role": "creator"
+    }
+  ]
+}
