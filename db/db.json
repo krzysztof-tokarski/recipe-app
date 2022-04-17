@@ -120,7 +120,7 @@
           "quantity": "adsadsada"
         }
       ],
-      "rating": 4,
+      "rating": 5,
       "creatorId": 2
     },
     {
@@ -150,7 +150,7 @@
           "quantity": "asdadsad"
         }
       ],
-      "rating": 3,
+      "rating": 4,
       "creatorId": 2
     },
     {
@@ -190,7 +190,7 @@
           "quantity": "asdsadasdasda"
         }
       ],
-      "rating": 5,
+      "rating": 3,
       "creatorId": 2
     },
     {
@@ -351,6 +351,25 @@
         {
           "name": "asdasda",
           "quantity": "asdasdasda"
+        }
+      ],
+      "rating": 5,
+      "creatorId": 2
+    },
+    {
+      "id": 21,
+      "name": "margherita",
+      "preparationSteps": [
+        "adasdasd"
+      ],
+      "ingredients": [
+        {
+          "name": "adasdasd",
+          "quantity": "asdasda"
+        },
+        {
+          "name": "asdads",
+          "quantity": "asdad"
         }
       ],
       "rating": 5,

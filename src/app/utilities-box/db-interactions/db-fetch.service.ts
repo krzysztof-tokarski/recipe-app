@@ -35,19 +35,16 @@ export class DbFetchService {
 
 
 
-
-
-
   public fetchRecipes(searchFieldValue?: string, sortingCriteria?: SortingCriteria) {
 
-    let recipesUrl = 'http://localhost:3000/recipes';
+    let recipesUrl = 'http://localhost:3000/recipes?';
 
     this.authenticationService.userSubject$.pipe(
       filter((user => user.role == "creator"))
     ).subscribe(
       (creator) => {
         const creatorInsert = `?creatorId_gte=${creator.id}&creatorId_lte=${creator.id}`
-        recipesUrl = recipesUrl + creatorInsert;
+        recipesUrl = recipesUrl.slice(0, -1) + creatorInsert;
       }
     )
 
@@ -68,6 +65,8 @@ export class DbFetchService {
     }
 
     recipesUrl = recipesUrl + insert;
+
+    console.log(recipesUrl)
 
     return this.httpClient.get<Recipe[]>(recipesUrl);
   }
